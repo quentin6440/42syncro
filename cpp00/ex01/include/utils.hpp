@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qcyril-a <qcyril-a@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qcyril-a <qcyril-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/08 14:34:52 by qcyril-a          #+#    #+#             */
-/*   Updated: 2026/09/08 14:34:53 by qcyril-a         ###   ########.fr       */
+/*   Updated: 2026/09/08 17:33:11 by qcyril-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@
 
 bool        readline(std::string &str);
 bool	    ft_isnum(const std::string &s);
-std::string	formatField(const std::string &str);
-void        printField(const std::string &str);
+std::string	formatField(int i, const std::string &str);
+void        printField(int i, const std::string &str);
+void	printFormatted(int i,const std::string &str);
+void	printFormattedL(int i,const std::string &str);
 
 #endif

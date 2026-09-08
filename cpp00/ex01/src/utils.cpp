@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qcyril-a <qcyril-a@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qcyril-a <qcyril-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/08 14:35:18 by qcyril-a          #+#    #+#             */
-/*   Updated: 2026/09/08 14:42:59 by qcyril-a         ###   ########.fr       */
+/*   Updated: 2026/09/08 17:41:17 by qcyril-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.hpp"
 #include <iomanip>
+#include <ios>
 #include <iostream>
 #include <string>
 
@@ -30,18 +31,29 @@ bool	ft_isnum(const std::string &s) {
 	return 1;
 }
 
-std::string	formatField(const std::string &str) {
+std::string	formatField(int i, const std::string &str) {
 	int	len = str.length();
-	if (len <= 10)
+	if (len <= i)
 		return str;
-
-	return str.substr(0, 9) + ".";
+	return str.substr(0, i - 1) + ".";
 }
 
-void	printField(const std::string &str) {
+void	printField(int i,const std::string &str) {
 	std::cout	<< "|" 
-					<< std::setw(10) 
-					<< formatField(str);
+					<< std::setw(i) 
+					<< formatField(i, str);
+}
+
+void	printFormatted(int i,const std::string &str) {
+	std::cout	<< std::right 
+				<< std::setw(i)
+				<< formatField(i, str);
+}
+
+void	printFormattedL(int i,const std::string &str) {
+	std::cout	<< std::left 
+				<< std::setw(i)
+				<< formatField(i, str);
 }
 
 bool    readline(std::string &str) {

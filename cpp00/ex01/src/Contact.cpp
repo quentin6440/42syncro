@@ -3,18 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   Contact.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qcyril-a <qcyril-a@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qcyril-a <qcyril-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/08 14:34:59 by qcyril-a          #+#    #+#             */
-/*   Updated: 2026/09/08 14:44:12 by qcyril-a         ###   ########.fr       */
+/*   Updated: 2026/09/08 17:32:39 by qcyril-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Contact.hpp"
 #include "utils.hpp"
 #include <iostream>
-#include <iomanip>
-#include <string>
 
 bool Contact::setInfo()
 {
@@ -51,19 +49,27 @@ bool Contact::setInfo()
 
 void Contact::displayInfo()
 {
-	printField("First name");
-	printField("Last name");
-	printField("Nickname");
-	printField("Phone number");
-	printField("Darkest secret");
-	std::cout << "|\n";
-
-	printField(name);
-	printField(surname);
-	printField(nickname);
-	printField(phoneNumber);
-	printField(secret);
-	std::cout << "|\n";
+	std::cout << "\n";
+	printFormatted(15, "First name");
+	std::cout << " : ";
+	printFormattedL(30, name);
+	std::cout << "\n";
+	printFormatted(15, "Last name");
+	std::cout << " : ";
+	printFormattedL(30, surname);
+	std::cout << "\n";
+	printFormatted(15, "Nick name");
+	std::cout << " : ";
+	printFormattedL(30, nickname);
+	std::cout << "\n";
+	printFormatted(15, "Phone number");
+	std::cout << " : ";
+	printFormattedL(30, phoneNumber);
+	std::cout << "\n";
+	printFormatted(15, "Darkest Secret");
+	std::cout << " : ";
+	printFormattedL(30, secret);
+	std::cout << "\n";
 }
 
 std::string	Contact::getName() {

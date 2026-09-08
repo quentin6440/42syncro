@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Phonebook.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qcyril-a <qcyril-a@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qcyril-a <qcyril-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/08 14:35:13 by qcyril-a          #+#    #+#             */
-/*   Updated: 2026/09/08 15:06:52 by qcyril-a         ###   ########.fr       */
+/*   Updated: 2026/09/08 17:36:34 by qcyril-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "utils.hpp"
 #include <cstdlib>
 #include <iostream>
-#include <string>
 #include <iomanip>
 #include <cstdio>
 
@@ -40,18 +39,18 @@ void Phonebook::displayTab()
 {
 	std::size_t i = 0;
 
-	printField("slot");
-	printField("First name");
-	printField("Last name");
-	printField("Nickname");
+	printField(10, "slot");
+	printField(10, "First name");
+	printField(10, "Last name");
+	printField(10, "Nickname");
 	std::cout << "|\n";
 
 	while (i < ct)
 	{
 		std::cout << "|" << std::setw(10) << i;
-		printField(contacts[i].getName());
-		printField(contacts[i].getSurname());
-		printField(contacts[i].getNickname());
+		printField(10, contacts[i].getName());
+		printField(10, contacts[i].getSurname());
+		printField(10, contacts[i].getNickname());
 		std::cout << "|\n";
 
 		i++;
@@ -69,28 +68,20 @@ void    Phonebook::searchContact()
 		std::cout << "enter at least one contact with add\n";
 		return ;
 	}
-	std::cout <<"tab here \n";
 	displayTab();
-	std::cout << "Capacity of memory 8 total , current count :" << ct << "\n search what index? : ";
+	std::cout << "Capacity of memory : 8 ; current count : " << ct << "\n Explore which index? : ";
 	if (!readline(s))
 		return ;
-	if (!ft_isnum(s))
+	if (!ft_isnum(s) || i >= 8)
 	{
-		std::cout << "\n mollo l'andouille\n";
-		return ;
-	}
-	i = std::atoi(s.c_str());
-	if (i >= 8)
-	{
-		std::cout << "\n over the capacity mate\n";
+		std::cout << "\n Bad usage\n";
 		return ;
 	}
 	if (i >= ct)
 	{
-		std::cout << "\n not registered\n";
+		std::cout << "\n Not registered\n";
 		return ;
 	}
-	std::cout <<"\ndisplay info here \n";
 	contacts[i].displayInfo();
-	std::cout << "\nfinish\n";
+	std::cout << "\n----------------\n";
 }

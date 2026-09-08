@@ -47,7 +47,32 @@ int parse(char *s)
         return (printf("Unexpected end of input\n"), 0);
     return 1;
 }
+/*
+MORE ROBUST
+int nbr(char *s, int *i)
+{
+    int a = 0;
 
+    if (isdigit((unsigned char)s[*i]))
+    {
+        while (isdigit((unsigned char)s[*i])) // multi-digit
+        {
+            a = a * 10 + (s[*i] - '0');
+            (*i)++;
+        }
+        return a;
+    }
+    if (s[*i] == '(')
+    {
+        (*i)++;              // skip '('
+        a = sum(s, i);
+        if (s[*i] == ')')
+            (*i)++;          // skip ')'
+        return a;
+    }
+    return 0;
+}
+*/
 int nbr(char *s, int *i)
 {
     int a = 0;

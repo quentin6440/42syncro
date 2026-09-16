@@ -1,4 +1,3 @@
-
 #ifndef NEWZOMBIE_H
 # define NEWZOMBIE_H
 

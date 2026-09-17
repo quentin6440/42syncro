@@ -1,5 +1,6 @@
 
 #include "../include/minirt.h"
+#include <fcntl.h>
 /*
 static unsigned int	ft_get_sphere_color(t_ray ray, double t, t_sphere sp)
 {
@@ -197,23 +198,36 @@ static int	ft_check_args(int argc, char **argv)
 	return (0);
 }
 
-int	main(int argc, char **argv)
+int main(int argc, char **argv)
 {
 	t_scene	*scene;
+	int		fd;
 
 	if (ft_check_args(argc, argv))
 	{
 		ft_putstr_fd("Error\nUsage: ./miniRT <scene.rt>\n", 2);
 		return (1);
 	}
+	fd = open(argv[1], O_RDONLY);
+	if (fd < 0)
+	{
+		ft_putstr_fd("Error\nCannot open .rt file\n", 2);
+		return (1);
+	}
 	scene = ft_calloc(1, sizeof(t_scene));
 	if (!scene)
-		ft_handle_error(0, NULL);
+		return (close(fd), 1);
 	scene->img_ptr = ft_calloc(1, sizeof(t_img));
 	if (!scene->img_ptr)
-		ft_handle_error(1, scene);
+		return (close(fd), free(scene), 1);
 
-	// TODO (Jour 7) : ft_parse_file(argv[1], scene);
+	// Appel du parsing
+	if (ft_parse_rt(fd, scene) < 0)
+	{
+		close(fd);
+		ft_clean_exit(scene); // Libère la mémoire déjà allouée et quitte
+	}
+	close(fd);
 
 	ft_run_time(scene);
 	ft_clean_exit(scene);

@@ -14,7 +14,7 @@ void	ft_free_null(void **p)
 		*p = NULL;
 	}
 }
-
+/*
 int	ft_clean_exit(t_scene *scene)
 {
 	if (!scene)
@@ -40,6 +40,47 @@ int	ft_clean_exit(t_scene *scene)
 	ft_putendl_fd("Clean exit OK, Good bye.", 1);
 	exit(0);
 }
+*/
+
+void	ft_free_objects(t_obj **lst)
+{
+	t_obj	*current;
+	t_obj	*next;
+
+	if (!lst || !*lst)
+		return ;
+	current = *lst;
+	while (current)
+	{
+		next = current->next;
+		free(current);
+		current = next;
+	}
+	*lst = NULL;
+}
+
+int	ft_clean_exit(t_scene *scene)
+{
+	if (!scene)
+		exit(0);
+	// 1. Libérer la liste chaînée des objets géométriques
+	ft_free_objects(&scene->objects);
+
+	// 2. Nettoyer les éléments MiniLibX s'ils ont été initialisés
+	if (scene->img_ptr && scene->mlx_ptr)
+		mlx_destroy_image(scene->mlx_ptr, scene->img_ptr);
+	if (scene->win_ptr && scene->mlx_ptr)
+		mlx_destroy_window(scene->mlx_ptr, scene->win_ptr);
+	if (scene->mlx_ptr)
+	{
+		mlx_destroy_display(scene->mlx_ptr);
+		free(scene->mlx_ptr);
+	}
+
+	// 3. Quitter proprement le programme
+	exit(0);
+	return (0);
+}
 
 void	ft_handle_error(int n, t_scene *scene)
 {
@@ -52,33 +93,4 @@ void	ft_handle_error(int n, t_scene *scene)
 	ft_putnbr_fd(n, 2);
 	ft_putchar_fd('\n', 2);
 	ft_clean_exit(scene);
-}
-
-double	ft_str_to_float(char *s)
-{
-	double	nb;
-	int		precision_factor;
-	int		sign;
-	int		i;
-
-	nb = 0.0;
-	precision_factor = 1;
-	sign = 1;
-	i = 0;
-	if (s[i] == '-' || s[i] == '+')
-	{
-		if (s[i] == '-')
-			sign = -1;
-		i++;
-	}
-	while (s[i] >= '0' && s[i] <= '9')
-		nb = 10 * nb + (s[i++] - '0');
-	if (s[i] == '.' || s[i] == ',')
-		i++;
-	while (s[i] >= '0' && s[i] <= '9')
-	{
-		nb = 10 * nb + (s[i++] - '0');
-		precision_factor *= 10;
-	}
-	return (sign * nb / precision_factor);
 }

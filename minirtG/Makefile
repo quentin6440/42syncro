@@ -17,6 +17,9 @@ SRC = 	main.c \
 		sphere.c \
 		cylinder.c \
 		plane.c \
+		parser.c \
+		parse_elements.c \
+		parse_utils.c \
       	vec_basic.c \
       	vec_math.c \
       	vec_utils.c

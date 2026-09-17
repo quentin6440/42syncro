@@ -1,0 +1,13 @@
+# Binaires et Fichiers Objets
+*.o
+*.a
+obj/
+miniRT
+
+# Submodule / Dossier MiniLibX
+minilibx-linux/
+
+# Fichiers temporaires ou logs
+*.swp
+*~
+.DS_Store

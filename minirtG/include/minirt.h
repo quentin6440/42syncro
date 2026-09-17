@@ -164,7 +164,8 @@ int		key_handler(int key, void *param);
 int		mouse_handler(int button, int x, int y, void *param);
 double	ft_str_to_float(char *s);
 //int		ft_clean_exit(t_scene *scene);
-void	ft_handle_error(int n, t_scene *scene);
+//void	ft_handle_error(int n, t_scene *scene);
+void	ft_handle_error(int err_code, t_scene *scene);
 void	ft_free_null(void **p);
 void	ft_notify_wrong_usage(t_scene *scene);
 

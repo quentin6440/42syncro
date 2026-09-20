@@ -2,6 +2,8 @@
 #include <string>
 
 Zombie  *newZombie(std::string name)
-{
-    return new Zombie(name);
+{    
+        return new Zombie(name);
 }
+
+Zombie *zombies = new Zombie[5];

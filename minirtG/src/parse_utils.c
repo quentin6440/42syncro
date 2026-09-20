@@ -1,5 +1,5 @@
 #include "../include/minirt.h"
-
+/*
 static double	ft_get_fractional(char *str)
 {
 	double	fract;
@@ -44,43 +44,85 @@ double	ft_str_to_float(char *str)
 		result += ft_get_fractional(&str[i + 1]);
 	return (result * sign);
 }
-
-t_vec3	ft_str_to_vec3(char *str)
+*/
+static double	ft_get_num(char *str, int *i)
 {
-	char	**split;
-	t_vec3	vec;
+	double	num;
+	double	divisor;
 
-	split = ft_split(str, ',');
-	if (!split || !split[0] || !split[1] || !split[2] || split[3])
+	num = 0.0;
+	divisor = 10.0;
+	while (str[*i] >= '0' && str[*i] <= '9')
 	{
-		ft_free_tab(split);
-		return (vec_new(0, 0, 0)); // Traiter l'erreur de format au parsing
+		num += (str[*i] - '0') / divisor;
+		divisor *= 10.0;
+		(*i)++;
 	}
-	vec.x = ft_str_to_float(split[0]);
-	vec.y = ft_str_to_float(split[1]);
-	vec.z = ft_str_to_float(split[2]);
-	ft_free_tab(split);
-	return (vec);
+	return (num);
 }
 
-int	ft_parse_line(char **tokens, t_scene *scene)
+int	ft_str_to_float(char *str, double *out)
 {
-	if (!tokens || !tokens[0])
-		return (0);
-	if (ft_strncmp(tokens[0], "A", 2) == 0)
-		return (ft_parse_ambient(tokens, scene));
-	else if (ft_strncmp(tokens[0], "C", 2) == 0)
-		return (ft_parse_camera(tokens, scene));
-	else if (ft_strncmp(tokens[0], "L", 2) == 0)
-		return (ft_parse_light(tokens, scene));
-	else if (ft_strncmp(tokens[0], "sp", 3) == 0)
-		return (ft_parse_sphere(tokens, scene));
-	else if (ft_strncmp(tokens[0], "pl", 3) == 0)
-		return (ft_parse_plane(tokens, scene));
-	else if (ft_strncmp(tokens[0], "cy", 3) == 0)
-		return (ft_parse_cylinder(tokens, scene));
-	ft_putstr_fd("Error\nUnknown identifier in .rt file\n", 2);
-	return (-1);
+	double	result;
+	double	sign;
+	int		i;
+
+	if (!str || !out || !*str)
+		return (1);
+	i = 0;
+	sign = 1.0;
+	if (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i] == '-')
+			sign = -1.0;
+		i++;
+	}
+	if (!str[i] || (str[i] < '0' && str[i] > '9' && str[i] != '.'))
+		return (1);
+	result = 0.0;
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		result = result * 10.0 + (str[i] - '0');
+		if (result > 1e6)
+			return (1);
+		i++;
+	}
+	if (str[i] == '.')
+	{
+		i++;
+		result += ft_get_num(str, &i);
+	}
+	if (str[i] != '\0')
+		return (1);
+	*out = result * sign;
+	return (0);
+}
+
+int	ft_str_to_vec3(char *str, t_vec3 *vec, int is_dir)
+{
+	char	**split;
+
+	if (!str || !vec)
+		return (1);
+	split = ft_split(str, ',');
+	if (!split)
+		return (1);
+	if (!split[0] || !split[1] || !split[2] || split[3])
+		return (ft_free_tab(split), 1);
+	if (ft_str_to_float(split[0], &vec->x) != 0
+		|| ft_str_to_float(split[1], &vec->y) != 0
+		|| ft_str_to_float(split[2], &vec->z) != 0)
+		return (ft_free_tab(split), 1);
+	ft_free_tab(split);
+	if (is_dir)
+	{
+		if (vec->x < -1.0 || vec->x > 1.0 || vec->y < -1.0 || vec->y > 1.0
+			|| vec->z < -1.0 || vec->z > 1.0)
+			return (1);
+		if (vec->x == 0.0 && vec->y == 0.0 && vec->z == 0.0)
+			return (1); // Vecteur direction (0,0,0) interdit !
+	}
+	return (0); // Succès
 }
 
 void	ft_free_tab(char **tab)
@@ -93,6 +135,7 @@ void	ft_free_tab(char **tab)
 	while (tab[i])
 	{
 		free(tab[i]);
+		tab[i] = NULL;
 		i++;
 	}
 	free(tab);

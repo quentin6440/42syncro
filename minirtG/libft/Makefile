@@ -9,8 +9,11 @@ SRC = 	ft_bzero.c \
       	ft_putendl_fd.c \
       	ft_putnbr_fd.c \
       	ft_putstr_fd.c \
+		ft_atof.c \
       	ft_strlen.c \
+		ft_strchr.c \
       	ft_strncmp.c \
+		ft_strtrim.c \
 		ft_strdup.c \
       	ft_substr.c \
       	ft_split.c \

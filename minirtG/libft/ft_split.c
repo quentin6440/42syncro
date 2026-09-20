@@ -11,6 +11,19 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stddef.h>
+
+static void ft_free_all(char **arr, size_t k)
+{
+	if (!arr)
+		return ;
+	while (k > 0)
+	{
+		k--;
+		free(arr[k]);
+	}
+	free(arr);
+}
 
 static size_t	ft_ctsections(char const *s, char delimiter)
 {
@@ -36,7 +49,7 @@ static size_t	ft_ctsections(char const *s, char delimiter)
 	return (nsections);
 }
 
-static void	ft_extractsection(char **section, char const *s, char c)
+static int	ft_extractsection(char **section, char const *s, char c)
 {
 	size_t	i;
 	size_t	j;
@@ -54,10 +67,17 @@ static void	ft_extractsection(char **section, char const *s, char c)
 			j = i;
 			while (s[j] && s[j] != c)
 				j++;
-			section[k++] = ft_substr(s, i, j - i);
+			section[k] = ft_substr(s, i, j - i);
+			if (!section[k])
+			{
+				ft_free_all(section, k);
+				return (1);
+			}
+			k++;
 			i = j;
 		}
 	}
+	return (0);
 }
 
 char	**ft_split(char const *s, char c)
@@ -76,6 +96,7 @@ char	**ft_split(char const *s, char c)
 	myarr = ft_calloc((ft_ctsections(s, c) + 1), sizeof(char *));
 	if (!myarr)
 		return (NULL);
-	ft_extractsection(myarr, s, c);
+	if (ft_extractsection(myarr, s, c))
+		return (NULL);
 	return (myarr);
 }

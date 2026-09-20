@@ -2,6 +2,7 @@
 *.o
 *.a
 build/
+obj/
 miniRT
 
 # Submodule / Dossier MiniLibX

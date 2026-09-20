@@ -1,9 +1,10 @@
 #include "Zombie.h"
 #include <iostream>
 
-Zombie::Zombie(std::string name) : _name(name)
+Zombie::Zombie()
 {
     std::cout << "Zombie constructor\n";
+
     return;
 }
 
@@ -15,5 +16,5 @@ Zombie::~Zombie()
 
 void    Zombie::announce(void)
 {
-    std::cout << _name << " is a brain? !\n";
+    std::cout << "Brain !\n";
 }

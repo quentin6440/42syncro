@@ -17,7 +17,7 @@ void	ft_put_pixel(int x, int y, unsigned int color, t_scene *scene)
 	pixel = scene->img_ptr->data + i;
 	*(unsigned int *)pixel = color;
 }
-
+/*
 int	ft_put_img_to_window(t_scene *scene)
 {
 	if (scene->img_ptr->p)
@@ -32,4 +32,4 @@ int	ft_put_img_to_window(t_scene *scene)
 	if (!scene->img_ptr->data)
 		return (1);
 	return (0);
-}
+}*/

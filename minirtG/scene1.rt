@@ -1,0 +1,23 @@
+# Configuration de l'ambiance : ratio [0.2], couleur RGB [255,255,255]
+A 0 255,255,255
+
+# Caméra : position [x,y,z], vecteur orientation [x,y,z], FOV [deg]
+C 0.0,1.0,-5.0 0.0,0.0,1.0 70
+
+# Lumière ponctuelle : position [x,y,z], ratio [0.7], couleur RGB [255,255,255]
+L -2.0,5.0,-3.0 0 255,255,255
+
+# Sphère rouge au centre : centre [x,y,z], diamètre [1.5], RGB [255,0,0]
+sp 0.0,0.0,0.0 1.5 255,0,0
+
+# Plan (Sol vert) : point [x,y,z], normale orientation [x,y,z], RGB [0,255,100]
+pl 0.0,-2.0,0.0 0.0,1.0,0.0 0,255,100
+
+# Cylindre bleu à droite dans la scene(= apparait a gauche sur limage , normal??): centre [x,y,z], axe orientation [x,y,z], diamètre [1.0], hauteur [2.0], RGB [0,100,255]
+cy 2.0,0.0,1.0 0.0,1.0,0.0 1.0 2.0 0,100,255
+# Cylindre 2
+cy -4.0,0.0,1.0 0.0,1.0,0.0 1.0 2.0 100,200,55
+
+sp 0.0,3.0,0.0 1.5 255,0,0
+
+sp 1.0,1.0,0.0 1.5 255,0,0

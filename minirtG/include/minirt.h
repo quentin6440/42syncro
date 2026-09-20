@@ -1,6 +1,7 @@
 #ifndef MINIRT_H
 # define MINIRT_H
 
+
 /* 1. INCLUDES */
 # include <math.h>
 # include <stdlib.h>
@@ -13,16 +14,11 @@
 # define ESC 65307
 # define ESC_1 53
 # define KEY_C 99
-# define ARROW_UP 65362
-# define ARROW_DOWN 65364
-# define ARROW_LEFT 65361
-# define ARROW_RIGHT 65363
-# define SCROLL_UP 4
-# define SCROLL_DOWN 5
+
+#define EPSILON 1e-6
 
 /* 3. STRUCTURES */
 
-// Image MLX
 typedef struct s_img
 {
 	void	*p;
@@ -32,7 +28,6 @@ typedef struct s_img
 	int		endian;
 }	t_img;
 
-// Optique & Rayons
 typedef struct s_ray
 {
 	t_vec3	origin;
@@ -45,45 +40,6 @@ typedef struct s_camera
 	t_vec3	dir;
 	double	fov;
 }	t_camera;
-
-// Formes géométriques
-typedef struct s_sphere
-{
-	t_vec3	center;
-	double	diameter;
-	double	radius;
-	t_vec3	color;
-}	t_sphere;
-
-typedef struct s_plane
-{
-	t_vec3	point;
-	t_vec3	normal;
-	t_vec3	color;
-}	t_plane;
-
-typedef struct s_cylinder
-{
-	t_vec3	center;
-	t_vec3	axis;
-	double	diameter;
-	double	height;
-	t_vec3	color;
-}	t_cylinder;
-
-/* Scène Globale MLX
-typedef struct s_scene
-{
-	void		*mlx_ptr;
-	void		*win_ptr;
-	t_img		*img_ptr;
-	int			win_width;
-	int			win_height;
-	int			x;
-	int			y;
-	int			color;
-	t_camera	camera;
-}	t_scene;*/
 
 typedef struct s_ambient
 {
@@ -108,11 +64,11 @@ typedef enum e_type
 typedef struct s_obj
 {
 	t_type			type;
-	t_vec3			pos;      // Centre (sp, cy) ou point de passage (pl)
-	t_vec3			dir;      // Vecteur normal orienté (pl, cy)
-	double			diameter; // Rayon = diameter / 2.0 (sp, cy)
-	double			height;   // Hauteur (cy)
-	t_vec3			color;    // Couleur RGB (0..255)
+	t_vec3			pos;
+	t_vec3			dir;
+	double			diameter;
+	double			height;
+	t_vec3			color;
 	struct s_obj	*next;
 }	t_obj;
 
@@ -131,42 +87,44 @@ typedef struct s_scene
 
 /* 4. PROTOTYPES */
 
-/* --- PARSING & UTILS --- */
-int		ft_check_file(char *filename);
+/* --- PARSING --- */
 int		ft_parse_rt(int fd, t_scene *scene);
 int		ft_parse_line(char **tokens, t_scene *scene);
-void	ft_free_tab(char **tab);
-void	ft_free_objects(t_obj **lst);
-int		ft_clean_exit(t_scene *scene);
-t_vec3	ft_str_to_vec3(char *str);
-
-/* Parsers d'éléments */
 int		ft_parse_ambient(char **tokens, t_scene *scene);
 int		ft_parse_camera(char **tokens, t_scene *scene);
 int		ft_parse_light(char **tokens, t_scene *scene);
-int		ft_parse_sphere(char **tokens, t_scene *scene);
-int		ft_parse_plane(char **tokens, t_scene *scene);
-int		ft_parse_cylinder(char **tokens, t_scene *scene);
+int		ft_parse_obj(char **tokens, t_scene *scene, t_type type);
 
-// Rendering & MLX
+/* --- RAYTRACING & RENDERING --- */
 void	ft_render_scene(t_scene *scene);
-void	ft_put_pixel(int x, int y, unsigned int color, t_scene *scene);
+//void	ft_put_pixel(int x, int y, unsigned int color, t_scene *scene);
+t_ray	ft_generate_ray(t_camera *cam, double u, double v, t_scene *scene);
+
+double	ft_hit_sphere(t_obj *sp, t_ray ray);
+
+double	ft_hit_plane(t_obj *pl, t_ray ray);
+
+double	ft_hit_cylinder(t_obj *cy, t_ray ray);
+double	ft_hit_cylinder_caps(t_obj *obj, t_ray ray, t_vec3 *out_norm);
+double	ft_hit_cylinder_side(t_obj *obj, t_ray ray);
+
+/* mlx / render utils */
 int		ft_put_img_to_window(t_scene *scene);
+void	ft_mlx_pixel_put(t_scene *scene, int x, int y, int color);
 
-// Ray-tracing Engine
-t_ray	ft_generate_ray(t_camera *cam, double u, double v);
-double	ft_hit_sphere(t_sphere sp, t_ray ray);
-double	ft_hit_plane(t_plane pl, t_ray ray);
-double	ft_hit_cylinder(t_cylinder cy, t_ray ray);
-
-// Events & Utils
+/* --- EVENTS & HOOKS --- */
 int		key_handler(int key, void *param);
 int		mouse_handler(int button, int x, int y, void *param);
-double	ft_str_to_float(char *s);
-//int		ft_clean_exit(t_scene *scene);
-//void	ft_handle_error(int n, t_scene *scene);
-void	ft_handle_error(int err_code, t_scene *scene);
+
+/* --- CLEAN & MEMORY UTILS --- */
+void	ft_free_tab(char **tab);
+void	ft_free_objects(t_obj **lst);
 void	ft_free_null(void **p);
-void	ft_notify_wrong_usage(t_scene *scene);
+int		ft_clean_exit(t_scene *scene);
+void	ft_error(char *msg, t_scene *scene);
+
+/* --- PARSING CONVERSIONS --- */
+int	ft_str_to_float(char *str, double *out);
+int	ft_str_to_vec3(char *str, t_vec3 *vec, int is_dir);
 
 #endif

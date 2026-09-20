@@ -9,22 +9,27 @@ MLX = ./minilibx-linux/libmlx.a
 LIBS = $(LIBFT) $(MLX) -lXext -lX11 -lm
 
 SRC = 	main.c \
+		close.c \
       	draw.c \
       	events.c \
-      	util.c \
+		mlx_utils.c \
 		scene.c \
 		ray.c \
-		sphere.c \
-		cylinder.c \
-		plane.c \
+		obj_sp.c \
+		obj_cl.c \
+		obj_cl_cap.c \
+		obj_cl_side.c \
+		obj_pl.c \
 		parser.c \
 		parse_elements.c \
+		parse_obj.c \
 		parse_utils.c \
       	vec_basic.c \
       	vec_math.c \
       	vec_utils.c
+      	#utils.c 
 
-OBJ_DIR = obj
+OBJ_DIR = build
 OBJ = $(SRC:%.c=$(OBJ_DIR)/%.o)
 
 all: $(NAME)
@@ -44,10 +49,10 @@ $(LIBFT):
 $(MLX):
 	@make -C ./minilibx-linux/ > /dev/null 2>&1
 
-$(OBJ_DIR):
-	@mkdir -p $(OBJ_DIR)
 
-$(OBJ_DIR)/%.o: src/%.c | $(OBJ_DIR)
+$(OBJ_DIR)/%.o: src/%.c
+#$(OBJ_DIR)/%.o: src/%.c | $(OBJ_DIR)
+	@mkdir -p $(OBJ_DIR)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:

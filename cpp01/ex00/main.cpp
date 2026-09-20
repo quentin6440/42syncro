@@ -1,19 +1,19 @@
 #include "Zombie.h"
 #include <iostream>
+#include <unistd.h>
 
 int main()
 {
-    std::cout << "HEllo";
-	struct Zombie zombie;
-	zombie.announce();
-/*
+    std::cout << "HEllo\n";
 
-	while (true)
-	{
+	struct Zombie zombie1("Joe");
+	zombie1.announce();
 
-		zombie.announce();
-		wait(1000);
-	}
-*/
+	Zombie	*zombie2 = newZombie("Jack");
+	zombie2->announce();
+	delete zombie2;
+
+	randomChump("Charlie");
+
     return 0;
 }

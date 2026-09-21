@@ -1,20 +1,23 @@
 #include "Zombie.h"
 #include <iostream>
 
-Zombie::Zombie()
-{
-    std::cout << "Zombie constructor\n";
-
-    return;
+Zombie::Zombie() : _name("init Zombie name") {
+    std::cout << "'" << _name << "' - constructor called\n";
+	return;
 }
 
 Zombie::~Zombie()
 {
-    std::cout << "Zombie destructor\n";
+    std::cout << "'" << _name << "' - destructor called\n";
     return;
+}
+
+void    Zombie::setName(std::string name)
+{
+    _name = name;
 }
 
 void    Zombie::announce(void)
 {
-    std::cout << "Brain !\n";
+    std::cout << _name << ": BraiiiiiiinnnzzzZ...\n";
 }

@@ -3,7 +3,9 @@
 *.a
 build/
 obj/
+
 miniRT
+zombies
 
 # Submodule / Dossier MiniLibX
 #minilibx-linux/

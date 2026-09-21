@@ -3,23 +3,24 @@ NAME = zombies
 CC = c++
 CFLAGS = -std=c++98 -Wall -Wextra -Werror
 
-SRC = main.cpp Zombie.cpp newZombie.cpp randomChomp.cpp
+SRC = main.cpp Zombie.cpp newZombie.cpp randomChump.cpp
 
-OBJ = $(SRC:%.cpp=obj/%.o)
+OBJ = $(SRC:%.cpp=build/%.o)
 
 all:	$(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+	@echo "Compilation OK"
 
-obj/%.o:	%.cpp
-	mkdir -p obj
-	$(CC) $(CFLAGS) -c $< -o $@
+build/%.o:	%.cpp
+	@mkdir -p build
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -rf obj
+	@rm -rf build
 
 fclean:	clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re: fclean all

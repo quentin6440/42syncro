@@ -1,8 +1,8 @@
 
 #include "../include/HumanA.h"
 #include "../include/HumanB.h"
-#include <iostream>
 
+/*
 int main(void)
 {
     std::cout << "This is ' Unnecessary Violence '\n\n";
@@ -21,26 +21,26 @@ int main(void)
 
     }
     return 0;
-}
-/*
-int main(void)
-{
-    std::cout << "This is ' Unnecessary Violence '\n\n";
-
-{
-Weapon  club = Weapon("crude spiked club");
-HumanA  hA1("Bob", club);
-hA1.attack();
-club.setType("some other type of club");
-hA1.attack();
-}
-{
-Weapon  club1 = Weapon("crude spiked club");
-HumanB  hB1("Jim");
-hB1.setWeapon(club1);
-hB1.attack();
-club1.setType("some other type of club");
-hB1.attack();
-}
-    return 0;
 }*/
+
+int main()
+{
+{
+    Weapon  club = Weapon("crude spiked club");
+    HumanA  bob("Bob", club);
+
+    bob.attack();
+    club.setType("some other type of club");
+    bob.attack();
+}
+{
+    HumanB  jim("Jim");
+    Weapon  club = Weapon("crude spiked club");
+    
+    jim.setWeapon(club);
+    jim.attack();
+    club.setType("some other type of club");
+    jim.attack();
+}
+	return 0;
+}

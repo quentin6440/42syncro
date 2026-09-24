@@ -2,13 +2,13 @@
 #include "../include/HumanA.h"
 #include "../include/HumanB.h"
 #include <iostream>
-/*
+
 int main(void)
 {
     std::cout << "This is ' Unnecessary Violence '\n\n";
 
     {
-//        Weapon  club1 = new Weapon("crude spiked club");
+        //Weapon  *weapon1 = new Weapon("crude spiked club");
         Weapon  weapon1("crude spiked club");
 
         HumanA fighter1("bob", weapon1);
@@ -17,11 +17,12 @@ int main(void)
 
         weapon1.setType("tennis racket");
         fighter1.attack();
-//      delete club1;
+        //delete weapon1;
 
     }
     return 0;
-}*/
+}
+/*
 int main(void)
 {
     std::cout << "This is ' Unnecessary Violence '\n\n";
@@ -42,4 +43,4 @@ club1.setType("some other type of club");
 hB1.attack();
 }
     return 0;
-}
+}*/

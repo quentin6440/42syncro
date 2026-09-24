@@ -1,50 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: qcyril-a <qcyril-a@student.42lisboa.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/09/21 13:33:36 by qcyril-a          #+#    #+#             */
+/*   Updated: 2026/09/21 13:33:55 by qcyril-a         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/minirt.h"
-/*
-static double	ft_get_fractional(char *str)
-{
-	double	fract;
-	double	divisor;
-	int		i;
 
-	fract = 0.0;
-	divisor = 10.0;
-	i = 0;
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		fract += (str[i] - '0') / divisor;
-		divisor *= 10.0;
-		i++;
-	}
-	return (fract);
-}
-
-double	ft_str_to_float(char *str)
-{
-	double	result;
-	double	sign;
-	int		i;
-
-	if (!str)
-		return (0.0);
-	i = 0;
-	sign = 1.0;
-	if (str[i] == '-' || str[i] == '+')
-	{
-		if (str[i] == '-')
-			sign = -1.0;
-		i++;
-	}
-	result = 0.0;
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		result = result * 10.0 + (str[i] - '0');
-		i++;
-	}
-	if (str[i] == '.')
-		result += ft_get_fractional(&str[i + 1]);
-	return (result * sign);
-}
-*/
 static double	ft_get_num(char *str, int *i)
 {
 	double	num;

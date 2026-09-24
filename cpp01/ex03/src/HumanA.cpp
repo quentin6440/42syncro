@@ -6,7 +6,7 @@ HumanA::HumanA(const std::string& name, Weapon& weapon)
 {
 }
 
-void HumanA::attack() const
+void HumanA::attack()
 {
     std::cout   << this->_name 
                 << " attacks with their " 

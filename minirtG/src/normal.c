@@ -1,3 +1,18 @@
+<<<<<<< Updated upstream
+=======
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   normal.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: qcyril-a <qcyril-a@student.42lisboa.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/09/20 13:10:00 by qcyril-a          #+#    #+#             */
+/*   Updated: 2026/09/21 13:32:38 by qcyril-a         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+>>>>>>> Stashed changes
 #include "../include/minirt.h"
 
 static t_vec3	ft_get_sphere_normal(t_obj *obj, t_vec3 hit_p)

@@ -97,13 +97,11 @@ int		ft_parse_obj(char **tokens, t_scene *scene, t_type type);
 
 /* --- RAYTRACING & RENDERING --- */
 void	ft_render_scene(t_scene *scene);
-//void	ft_put_pixel(int x, int y, unsigned int color, t_scene *scene);
 t_ray	ft_generate_ray(t_camera *cam, double u, double v, t_scene *scene);
+t_vec3	ft_get_normal(t_obj *obj, t_vec3 hit_p, t_ray ray);
 
 double	ft_hit_sphere(t_obj *sp, t_ray ray);
-
 double	ft_hit_plane(t_obj *pl, t_ray ray);
-
 double	ft_hit_cylinder(t_obj *cy, t_ray ray);
 double	ft_hit_cylinder_caps(t_obj *obj, t_ray ray, t_vec3 *out_norm);
 double	ft_hit_cylinder_side(t_obj *obj, t_ray ray);

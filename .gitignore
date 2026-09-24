@@ -4,10 +4,14 @@
 build/
 obj/
 
+phonebook
 miniRT
 zombies
+hiThisIsBrain
+unnecessaryViolence
 
 # Submodule / Dossier MiniLibX
+# no-need anymore since its now included as a submodule
 #minilibx-linux/
 
 # Fichiers temporaires ou logs

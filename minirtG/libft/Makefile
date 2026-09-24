@@ -19,27 +19,27 @@ SRC = 	ft_bzero.c \
       	ft_split.c \
       	get_next_line.c
 
-OBJ_DIR = obj
+OBJ_DIR = build
 OBJ = $(SRC:%.c=$(OBJ_DIR)/%.o)
 
 NAME = libft.a
 
-all: $(NAME)
+@all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(AR) -rcs $@ $(OBJ)
+	@$(AR) -rcs $@ $(OBJ)
 
 $(OBJ_DIR)/%.o: %.c libft.h | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJ_DIR):
-	mkdir -p $(OBJ_DIR)
+	@mkdir -p $(OBJ_DIR)
 
 clean:
-	$(RM) $(OBJ_DIR)
+	@$(RM) $(OBJ_DIR)
 
 fclean: clean
-	$(RM) $(NAME)
+	@$(RM) $(NAME)
 
 re: fclean all
 

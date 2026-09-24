@@ -45,8 +45,16 @@ static unsigned int	ft_trace_ray(t_ray ray, t_scene *scene)
 		}
 		obj = obj->next;
 	}
+/*
+AFFICHE EN COULEUR ORIGINALE
+*/
 	if (closest_obj)
 		return (ft_rgb_to_uint(closest_obj->color));
+
+
+
+
+
 	return (0x000000); // Fond noir si aucun objet touché
 }
 

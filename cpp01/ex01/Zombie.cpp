@@ -1,7 +1,7 @@
 #include "Zombie.h"
 #include <iostream>
 
-Zombie::Zombie() : _name("init Zombie name") {
+Zombie::Zombie() : _name("unnamed zombie") {
     std::cout << "'" << _name << "' - constructor called\n";
 	return;
 }

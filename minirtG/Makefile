@@ -13,7 +13,7 @@ SRC = 	main.c \
       	draw.c \
       	events.c \
 		mlx_utils.c \
-		scene.c \
+		render.c \
 		ray.c \
 		obj_sp.c \
 		obj_cl.c \

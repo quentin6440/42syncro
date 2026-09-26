@@ -45,20 +45,30 @@ void ClapTrap::attack(const std::string& target) {
     }
 }
 
-void ClapTrap::takeDamage(unsigned int amount) {
-    if (_hitPoints > 0) {
-        _hitPoints -= amount;
-        if (_hitPoints < 0) _hitPoints = 0;
-        std::cout << "ClapTrap " << _name << " takes " << amount 
-                  << " points of damage! Remaining hit points: " << _hitPoints << std::endl;
-    } else {
-        std::cout << "ClapTrap " << _name << " is already dead." << std::endl;
-    }
-    if (_hitPoints == 0 && amount) {
-        std::cout << " ... ClapTrap " << _name << " has died." << std::endl;
-    } else {
-        std::cout <<  std::endl;
-    }
+void ClapTrap::takeDamage(unsigned int amount)
+{
+	if (_hitPoints <= 0)
+	{
+		std::cout << "ClapTrap " << _name
+			<< " is already dead." << std::endl;
+		return;
+	}
+
+	if (amount >= static_cast<unsigned int>(_hitPoints))
+		_hitPoints = 0;
+	else
+		_hitPoints -= static_cast<int>(amount);
+
+	std::cout << "ClapTrap " << _name
+		<< " takes " << amount
+		<< " points of damage! Remaining hit points: "
+		<< _hitPoints << std::endl;
+
+	if (_hitPoints == 0)
+		std::cout << " ... ClapTrap " << _name
+			<< " has died." << std::endl;
+	else
+		std::cout << std::endl;
 }
 
 void ClapTrap::beRepaired(unsigned int amount) {

@@ -14,11 +14,11 @@ class ClapTrap {
         ClapTrap();                                 //default constructor
         ClapTrap(const ClapTrap& other);            //copy constructor
         ClapTrap& operator=(const ClapTrap& other); //copy assignment operator
-        ~ClapTrap();                                //default destructor
+        virtual ~ClapTrap();                                //default destructor
 
         ClapTrap(const std::string& name);  //custom constructor (name init as parameter)
 
-        void attack(const std::string& target);
+        virtual void attack(const std::string& target);
         void takeDamage(unsigned int amount);
         void beRepaired(unsigned int amount);
 };

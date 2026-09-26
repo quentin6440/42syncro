@@ -4,11 +4,11 @@
 #include <iostream>
 
 ScavTrap::ScavTrap() : ClapTrap() {
-    std::cout << "ScavTrap default constructor called for the object named: " << this->_name << std::endl;
     this->_name = "Default ScavTrap";
     this->_hitPoints = 100;
     this->_energyPoints = 50;
     this->_attackDamage = 20;
+    std::cout << "ScavTrap default constructor called for the object named: " << this->_name << std::endl;
 }
 
 ScavTrap::ScavTrap(const ScavTrap& other) 
@@ -40,11 +40,21 @@ void ScavTrap::guardGate(void) {
 }
 
 void ScavTrap::attack(const std::string& target) {
-    if (this->_energyPoints > 0 && this->_hitPoints > 0) {
+    
+    if (_hitPoints <= 0) {
+       std::cout << "ScavTrap " << _name
+            << " cannot attack because it has no hit points left."
+            << std::endl;
+    }
+ 
+    else if (_energyPoints <= 0) {
+        std::cout << "ScavTrap " << _name
+            << " cannot attack because it has no energy points left."
+            << std::endl;
+    }
+    else {
         std::cout << "ScavTrap " << this->_name << " attacks " << target 
                   << ", causing " << this->_attackDamage << " points of damage!" << std::endl;
         this->_energyPoints--;
-    } else {
-        std::cout << "ScavTrap " << this->_name << " cannot attack, ran out of energy or hit points." << std::endl;
     }
 }

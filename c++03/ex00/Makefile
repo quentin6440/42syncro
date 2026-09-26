@@ -1,31 +1,31 @@
-NAME = fixedPointNumber
+NAME = clapTrap
 
-CC = c++
+CXX = c++
 CFLAGS = -std=c++98 -Wall -Wextra -Werror
 INCLUDE = inc/
 SRC_DIR = src/
 OBJ_DIR = build/
 
-SRC = main.cpp Fixed.cpp
+SRC = main.cpp ClapTrap.cpp
 
 OBJ = $(addprefix $(OBJ_DIR), $(SRC:.cpp=.o))
 
 .PHONY: all clean fclean re run
 
-run: $(NAME)
-	@./$(NAME)
-
 all:	$(NAME)
 
 $(NAME): $(OBJ)
-	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
-	@echo "compilation OK, run with: ./$(NAME)"
+	@$(CXX) $(CFLAGS) $(OBJ) -o $(NAME)
+	@echo "compilation OK, binary created here: ./$(NAME)"
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 
 $(OBJ_DIR)%.o:	$(SRC_DIR)%.cpp | $(OBJ_DIR)
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CXX) $(CFLAGS) -c $< -o $@
+
+run: $(NAME)
+	@./$(NAME)
 
 clean:
 	@rm -rf $(OBJ_DIR)

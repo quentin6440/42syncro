@@ -1,25 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parse_obj.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-<<<<<<< Updated upstream
-/*   By: qcyril-a <qcyril-a@student.42lisboa.c      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/09/20 12:00:00 by qcyril-a          #+#    #+#             */
-/*   Updated: 2026/09/20 12:00:00 by qcyril-a         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-=======
-/*   By: qcyril-a <qcyril-a@student.42lisboa.com    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/09/21 13:33:23 by qcyril-a          #+#    #+#             */
-/*   Updated: 2026/09/21 13:33:30 by qcyril-a         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-
 /*
 #include "../include/minirt.h"
 
@@ -88,7 +66,7 @@ int	ft_parse_obj(char **tokens, t_scene *scene, t_type type)
 	return (0);
 }*/
 
->>>>>>> Stashed changes
+
 #include "../include/minirt.h"
 
 static void	ft_obj_add_back(t_obj **lst, t_obj *new_obj)

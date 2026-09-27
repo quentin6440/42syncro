@@ -13,17 +13,6 @@ FragTrap::FragTrap()
 		<< _name << std::endl;
 }
 
-FragTrap::FragTrap(const std::string &name)
-	: ClapTrap(name)
-{
-	_hitPoints = 100;
-	_energyPoints = 100;
-	_attackDamage = 30;
-
-	std::cout << "FragTrap custom constructor called for the object named: "
-		<< _name << std::endl;
-}
-
 FragTrap::FragTrap(const FragTrap &other)
 	: ClapTrap(other)
 {
@@ -41,6 +30,17 @@ FragTrap	&FragTrap::operator=(const FragTrap &other)
 FragTrap::~FragTrap()
 {
 	std::cout << "FragTrap destructor called for the object named: "
+		<< _name << std::endl;
+}
+
+FragTrap::FragTrap(const std::string &name)
+	: ClapTrap(name)
+{
+	_hitPoints = 100;
+	_energyPoints = 100;
+	_attackDamage = 30;
+
+	std::cout << "FragTrap custom constructor called for the object named: "
 		<< _name << std::endl;
 }
 

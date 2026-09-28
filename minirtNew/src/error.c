@@ -1,4 +1,16 @@
-#include "../include/minirt.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: qcyril-a <qcyril-a@student.42lisboa.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/09/28 18:16:05 by qcyril-a          #+#    #+#             */
+/*   Updated: 2026/09/28 18:16:08 by qcyril-a         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../include/minirt.h" 	
 
 int	ft_parse_fail(t_parse_error *error, const char *message)
 {
@@ -28,7 +40,6 @@ void	ft_destroy_scene(t_scene *scene)
 {
 	if (!scene)
 		return ;
-
 	if (scene->mlx_ptr)
 	{
 		if (scene->img_ptr && scene->img_ptr->p)

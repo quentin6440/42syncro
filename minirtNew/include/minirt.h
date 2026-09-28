@@ -6,7 +6,7 @@
 /*   By: qcyril-a <qcyril-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/21 13:31:14 by qcyril-a          #+#    #+#             */
-/*   Updated: 2026/09/28 17:41:37 by qcyril-a         ###   ########.fr       */
+/*   Updated: 2026/09/28 18:02:48 by qcyril-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,18 +118,32 @@ typedef struct s_scene
 	int			has_light;
 }	t_scene;
 
-typedef struct s_parse_error
-{
-	int			line;
-	const char	*message;
-}	t_parse_error;
-
 typedef struct s_quadratic
 {
 	double	a;
 	double	b;
 	double	c;
 }	t_quadratic;
+
+typedef struct s_basis
+{
+	t_vec3	forward;
+	t_vec3	right;
+	t_vec3	up;
+}	t_basis;
+
+typedef struct s_ray_view
+{
+	t_basis	basis;
+	double	aspect_ratio;
+	double	fov_adjustment;
+}	t_ray_view;
+
+typedef struct s_parse_error
+{
+	int			line;
+	const char	*message;
+}	t_parse_error;
 
 typedef struct s_global_parser
 {

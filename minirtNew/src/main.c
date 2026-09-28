@@ -5,14 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: qcyril-a <qcyril-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/09/21 13:32:26 by qcyril-a          #+#    #+#             */
-/*   Updated: 2026/09/28 00:00:00 by quentin           ###   ########.fr       */
+/*   Created: 2026/09/28 18:15:02 by qcyril-a          #+#    #+#             */
+/*   Updated: 2026/09/28 18:15:22 by qcyril-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minirt.h"
-#include <fcntl.h>
-#include <stdio.h>
 
 static int	ft_check_args(int argc, char **argv)
 {

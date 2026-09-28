@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: qcyril-a <qcyril-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/09/28 00:00:00 by quentin           #+#    #+#             */
-/*   Updated: 2026/09/28 17:52:38 by qcyril-a         ###   ########.fr       */
+/*   Created: 2026/09/28 18:16:40 by qcyril-a          #+#    #+#             */
+/*   Updated: 2026/09/28 18:16:48 by qcyril-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	ft_str_to_float(char *str, double *out)
 {
 	return (ft_atof(str, out));
 }
+
 int	ft_str_to_color(char *str, t_vec3 *color)
 {
 	char	**parts;

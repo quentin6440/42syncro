@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_obj.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: qcyril-a <qcyril-a@student.42lisboa.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/09/28 18:11:34 by qcyril-a          #+#    #+#             */
+/*   Updated: 2026/09/28 18:11:37 by qcyril-a         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/minirt.h"
 
 static void	ft_obj_add_back(t_obj **list, t_obj *new_obj)
@@ -78,20 +90,6 @@ static int	ft_fill_cylinder(t_obj *obj, char **tokens,
 	return (0);
 }
 
-static int	ft_fill_obj_data(t_obj *obj, char **tokens,
-		t_parse_error *error)
-{
-	if (!obj || !tokens)
-		return (ft_parse_fail(error, "invalid object data"));
-	if (obj->type == SPHERE)
-		return (ft_fill_sphere(obj, tokens, error));
-	if (obj->type == PLANE)
-		return (ft_fill_plane(obj, tokens, error));
-	if (obj->type == CYLINDER)
-		return (ft_fill_cylinder(obj, tokens, error));
-	return (ft_parse_fail(error, "unknown object type"));
-}
-
 int	ft_parse_obj(char **tokens, t_scene *scene, t_type type,
 		t_parse_error *error)
 {
@@ -101,14 +99,17 @@ int	ft_parse_obj(char **tokens, t_scene *scene, t_type type,
 		return (ft_parse_fail(error, "invalid object data"));
 	new_obj = ft_calloc(1, sizeof(t_obj));
 	if (!new_obj)
-		return (ft_parse_fail(error,
-				"memory allocation failed"));
+		return (ft_parse_fail(error, "memory allocation failed"));
 	new_obj->type = type;
-	if (ft_fill_obj_data(new_obj, tokens, error) < 0)
-	{
-		free(new_obj);
-		return (-1);
-	}
+	if (type == SPHERE
+		&& ft_fill_sphere(new_obj, tokens, error) < 0)
+		return (free(new_obj), -1);
+	if (type == PLANE
+		&& ft_fill_plane(new_obj, tokens, error) < 0)
+		return (free(new_obj), -1);
+	if (type == CYLINDER
+		&& ft_fill_cylinder(new_obj, tokens, error) < 0)
+		return (free(new_obj), -1);
 	ft_obj_add_back(&scene->objects, new_obj);
 	return (0);
 }

@@ -127,7 +127,6 @@ int		ft_parse_ambient(char **tokens, t_scene *scene);
 int		ft_parse_camera(char **tokens, t_scene *scene);
 int		ft_parse_light(char **tokens, t_scene *scene);
 int		ft_parse_obj(char **tokens, t_scene *scene, t_type type);
-char		**ft_split_ws(char const *str);
 int			ft_str_to_color(char *str, t_vec3 *color);
 
 /* --- RAYTRACING & RENDERING --- */

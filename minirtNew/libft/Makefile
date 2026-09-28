@@ -26,7 +26,7 @@ OBJ = $(SRC:%.c=$(OBJ_DIR)/%.o)
 
 NAME = libft.a
 
-@all: $(NAME)
+all: $(NAME)
 
 $(NAME): $(OBJ)
 	@$(AR) -rcs $@ $(OBJ)
@@ -45,4 +45,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY = all clean fclean re
+.PHONY: all clean fclean re

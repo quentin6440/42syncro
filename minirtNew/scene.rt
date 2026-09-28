@@ -1,23 +1,26 @@
-# Configuration de l'ambiance : ratio [0.2], couleur RGB [255,255,255]
-A 0.2 255,255,255
+ # Lumiere ambiante
+A 0.15 255,255,255
 
-# Caméra : position [x,y,z], vecteur orientation [x,y,z], FOV [deg]
-C 0.0,1.0,-5.0 0.0,0.0,1.0 70
+# Camera plus haute et plus proche
+C 0.0,3.5,-5.5 0.0,-0.25,1.0 70
 
-# Lumière ponctuelle : position [x,y,z], ratio [0.7], couleur RGB [255,255,255]
-L -2.0,5.0,-3.0 0 255,255,255
+# Lumiere principale
+L -4.0,7.0,-3.0 0.85 255,255,255
 
-# Sphère rouge au centre : centre [x,y,z], diamètre [1.5], RGB [255,0,0]
-sp 0.0,0.0,0.0 1.5 255,0,0
+# Sol
+pl 0.0,-1.5,0.0 0.0,1.0,0.0 45,120,65
 
-# Plan (Sol vert) : point [x,y,z], normale orientation [x,y,z], RGB [0,255,100]
-pl 0.0,-2.0,0.0 0.0,1.0,0.0 0,255,100
+# Sphere rouge au centre
+sp 0.0,0.0,4.5 2.5 220,35,35
 
-# Cylindre bleu à droite dans la scene(= apparait a gauche sur limage , normal??): centre [x,y,z], axe orientation [x,y,z], diamètre [1.0], hauteur [2.0], RGB [0,100,255]
-cy 2.0,0.0,1.0 0.0,1.0,0.0 1.0 2.0 0,100,255
-# Cylindre 2
-cy -4.0,0.0,1.0 0.0,1.0,0.0 1.0 2.0 100,200,55
+# Cylindre bleu a gauche de l'image
+cy -2.8,0.0,5.5 0.0,1.0,0.0 1.8 3.5 35,90,220
 
-sp 0.0,3.0,0.0 1.5 255,0,0
+# Cylindre jaune a droite de l'image
+cy 2.8,0.0,5.5 0.0,1.0,0.0 1.8 3.5 230,180,35
 
-sp 1.0,1.0,0.0 1.5 255,0,0
+# Petite sphere verte en arriere
+sp 0.0,1.0,8.0 1.4 35,190,90
+
+# Cylindre horizontal en profondeur
+cy 0.0,0.0,9.0 1.5,0.0,0.0 1.5 4.0 170,60,190

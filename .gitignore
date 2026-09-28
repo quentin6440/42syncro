@@ -14,7 +14,7 @@ harl2
 
 # Submodule / Dossier MiniLibX
 # no-need anymore since its now included as a submodule
-#minilibx-linux/
+minilibx-linux/
 
 # Fichiers temporaires ou logs
 *.swp

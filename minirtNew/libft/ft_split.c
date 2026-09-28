@@ -13,7 +13,7 @@
 #include "libft.h"
 #include <stddef.h>
 
-static void ft_free_all(char **arr, size_t k)
+static void	ft_free_all(char **arr, size_t k)
 {
 	if (!arr)
 		return ;

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   events.c                                           :+:      :+:    :+:   */
+/*   ft_atoi_strict.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qcyril-a <qcyril-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,20 +10,35 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minirt.h"
+#include "libft.h"
 
-int	key_handler(int key, void *param)
+static int	ft_is_digit(char c)
 {
-	if (key == ESC || key == ESC_1)
-		ft_clean_exit((t_scene *)param);
-	return (0);
+	return (c >= '0' && c <= '9');
 }
 
-/*int	mouse_handler(int button, int x, int y, void *param)
+int	ft_atoi_strict(char *str, int *out)
 {
-	(void)button;
-	(void)x;
-	(void)y;
-	(void)param;
+	int		i;
+	long	value;
+
+	if (!str || !out || !str[0])
+		return (1);
+	i = 0;
+	value = 0;
+	if (str[i] == '+')
+		i++;
+	if (!str[i])
+		return (1);
+	while (ft_is_digit(str[i]))
+	{
+		value = value * 10 + (str[i] - '0');
+		if (value > 255)
+			return (1);
+		i++;
+	}
+	if (str[i] != '\0')
+		return (1);
+	*out = (int)value;
 	return (0);
-}*/
+}

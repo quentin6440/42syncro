@@ -1,5 +1,3 @@
-<<<<<<< Updated upstream
-=======
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -7,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: qcyril-a <qcyril-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/09/20 13:10:00 by qcyril-a          #+#    #+#             */
-/*   Updated: 2026/09/21 13:32:38 by qcyril-a         ###   ########.fr       */
+/*   Created: 2026/09/28 00:00:00 by quentin           #+#    #+#             */
+/*   Updated: 2026/09/28 00:00:00 by quentin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,59 +14,52 @@
 
 static t_vec3	ft_sphere_normal(t_hit hit)
 {
-	t_vec3	n;
+	t_vec3	normal;
 
-	n = vec_sub(hit.point, hit.obj->pos);
-	return (vec_normalize(n));
+	normal = vec_sub(hit.point, hit.obj->pos);
+	return (vec_normalize(normal));
 }
 
-static t_vec3	ft_plane_normal(t_hit hit, t_ray ray)
+static t_vec3	ft_plane_normal(t_hit hit)
 {
-	t_vec3	n;
-
-	n = vec_normalize(hit.obj->dir);
-	if (vec_dot(n, ray.dir) > 0.0)
-		n = vec_scale(n, -1.0);
-	return (n);
+	return (vec_normalize(hit.obj->dir));
 }
 
 static t_vec3	ft_cylinder_normal(t_hit hit)
 {
 	t_vec3	v;
-	t_vec3	n;
-	double	m;
+	t_vec3	axis;
+	t_vec3	normal;
+	double	projection;
 	double	half_height;
 
 	v = vec_sub(hit.point, hit.obj->pos);
-	m = vec_dot(v, hit.obj->dir);
+	axis = vec_normalize(hit.obj->dir);
+	projection = vec_dot(v, axis);
 	half_height = hit.obj->height / 2.0;
-
-	/*
-	 * Pour l'instant on considère pos comme le centre du cylindre.
-	 * Les deux cas suivants correspondent aux bouchons.
-	 */
-	if (fabs(m - half_height) < EPSILON)
-		return (vec_normalize(hit.obj->dir));
-	if (fabs(m + half_height) < EPSILON)
-		return (vec_scale(vec_normalize(hit.obj->dir), -1.0));
-
-	n = vec_sub(v,
-			vec_scale(hit.obj->dir,
-				vec_dot(v, hit.obj->dir)));
-	return (vec_normalize(n));
+	if (fabs(projection - half_height) < EPSILON)
+		return (axis);
+	if (fabs(projection + half_height) < EPSILON)
+		return (vec_scale(axis, -1.0));
+	normal = vec_sub(v, vec_scale(axis, projection));
+	return (vec_normalize(normal));
 }
 
 t_vec3	ft_get_normal(t_hit hit, t_ray ray)
 {
-	if (!hit.valid || !hit.obj)
-		return (vec_new(0, 0, 0));
-	if (hit.obj->type == SPHERE)
-		return (ft_sphere_normal(hit));
-	if (hit.obj->type == PLANE)
-		return (ft_plane_normal(hit, (t_ray){hit.point, hit.obj->dir}));
-	if (hit.obj->type == CYLINDER)
-		return (ft_cylinder_normal(hit));
-	return (vec_new(0, 0, 0));
-}
+	t_vec3	normal;
 
+	if (!hit.valid || !hit.obj)
+		return (vec_new(0.0, 0.0, 0.0));
+	if (hit.obj->type == SPHERE)
+		normal = ft_sphere_normal(hit);
+	else if (hit.obj->type == PLANE)
+		normal = ft_plane_normal(hit);
+	else if (hit.obj->type == CYLINDER)
+		normal = ft_cylinder_normal(hit);
+	else
+		return (vec_new(0.0, 0.0, 0.0));
+	if (vec_dot(normal, ray.dir) > 0.0)
+		normal = vec_scale(normal, -1.0);
+	return (normal);
 }

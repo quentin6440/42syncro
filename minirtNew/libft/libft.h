@@ -20,9 +20,11 @@
 #  define BUFFER_SIZE 42
 # endif
 
+int	    ft_atoi_strict(char *str, int *out);
 int	    ft_atof(char *str, double *out);
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t nmemb, size_t size);
+int	    ft_isspace(char c);
 size_t	ft_strlen(const char *s);
 void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);

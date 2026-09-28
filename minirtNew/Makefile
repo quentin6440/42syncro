@@ -15,6 +15,10 @@ SRC = 	main.c \
 		mlx_utils.c \
 		render.c \
 		ray.c \
+		intersect.c \
+		light.c \
+		normal.c \
+		shadow.c \
 		obj_sp.c \
 		obj_cl.c \
 		obj_cl_cap.c \

@@ -1,5 +1,5 @@
 # Configuration de l'ambiance : ratio [0.2], couleur RGB [255,255,255]
-A 0 255,255,255
+A 0.2 255,255,255
 
 # Caméra : position [x,y,z], vecteur orientation [x,y,z], FOV [deg]
 C 0.0,1.0,-5.0 0.0,0.0,1.0 70

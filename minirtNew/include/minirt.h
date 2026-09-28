@@ -113,6 +113,9 @@ typedef struct s_scene
 	t_ambient	ambient;
 	t_light		light;
 	t_obj		*objects;
+	int			has_ambient;
+	int			has_camera;
+	int			has_light;
 }	t_scene;
 
 /* 4. PROTOTYPES */
@@ -124,6 +127,8 @@ int		ft_parse_ambient(char **tokens, t_scene *scene);
 int		ft_parse_camera(char **tokens, t_scene *scene);
 int		ft_parse_light(char **tokens, t_scene *scene);
 int		ft_parse_obj(char **tokens, t_scene *scene, t_type type);
+char		**ft_split_ws(char const *str);
+int			ft_str_to_color(char *str, t_vec3 *color);
 
 /* --- RAYTRACING & RENDERING --- */
 void	ft_render_scene(t_scene *scene);
@@ -145,7 +150,7 @@ void	ft_mlx_pixel_put(t_scene *scene, int x, int y, int color);
 
 /* --- EVENTS & HOOKS --- */
 int		key_handler(int key, void *param);
-int		mouse_handler(int button, int x, int y, void *param);
+//int		mouse_handler(int button, int x, int y, void *param);
 
 /* --- CLEAN & MEMORY UTILS --- */
 void	ft_free_tab(char **tab);

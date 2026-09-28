@@ -9,14 +9,16 @@ SRC = 	ft_bzero.c \
       	ft_putendl_fd.c \
       	ft_putnbr_fd.c \
       	ft_putstr_fd.c \
+		ft_atoi_strict.c \
 		ft_atof.c \
+		ft_isspace.c \
       	ft_strlen.c \
 		ft_strchr.c \
       	ft_strncmp.c \
 		ft_strtrim.c \
 		ft_strdup.c \
       	ft_substr.c \
-      	ft_split.c \
+		ft_split.c \
       	get_next_line.c
 
 OBJ_DIR = build

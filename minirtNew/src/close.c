@@ -6,13 +6,11 @@
 /*   By: qcyril-a <qcyril-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/28 00:00:00 by quentin           #+#    #+#             */
-/*   Updated: 2026/09/28 15:40:53 by qcyril-a         ###   ########.fr       */
+/*   Updated: 2026/09/28 16:53:56 by qcyril-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minirt.h"
-#include <errno.h>
-#include <stdio.h>
 
 void	ft_free_null(void **ptr)
 {
@@ -38,17 +36,6 @@ void	ft_free_objects(t_obj **list)
 		current = next;
 	}
 	*list = NULL;
-}
-
-void	ft_error(char *message, t_scene *scene)
-{
-	write(2, "Error\n", 6);
-	if (message)
-	{
-		write(2, message, ft_strlen(message));
-		write(2, "\n", 1);
-	}
-	ft_clean_exit(scene);
 }
 
 void	ft_runtime_error(t_scene *scene, const char *message)

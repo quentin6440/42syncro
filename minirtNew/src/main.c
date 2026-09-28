@@ -6,7 +6,7 @@
 /*   By: qcyril-a <qcyril-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/21 13:32:26 by qcyril-a          #+#    #+#             */
-/*   Updated: 2026/09/28 02:38:08 by quintondell      ###   ########.fr       */
+/*   Updated: 2026/09/28 15:15:51 by qcyril-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,48 @@
 #include <fcntl.h>
 #include <stdio.h>
 
+static void	ft_run_time(t_scene *scene)
+{
+	if (!scene)
+		exit(EXIT_FAILURE);
+
+	scene->win_width = 800;
+	scene->win_height = 600;
+
+	scene->mlx_ptr = mlx_init();
+	if (!scene->mlx_ptr)
+		ft_runtime_error(scene, "Failed to initialize MiniLibX");
+
+	scene->win_ptr = mlx_new_window(
+			scene->mlx_ptr,
+			scene->win_width,
+			scene->win_height,
+			"miniRT - Raytracer");
+	if (!scene->win_ptr)
+		ft_runtime_error(scene, "Failed to create MiniLibX window");
+
+	if (ft_put_img_to_window(scene) != 0)
+		ft_runtime_error(scene, "Failed to create MiniLibX image");
+
+	printf("avant render\n");
+	ft_render_scene(scene);
+	printf("apres render\n");
+
+	mlx_put_image_to_window(
+		scene->mlx_ptr,
+		scene->win_ptr,
+		scene->img_ptr->p,
+		0,
+		0);
+
+	printf("image affichee\n");
+
+	mlx_key_hook(scene->win_ptr, key_handler, scene);
+	mlx_hook(scene->win_ptr, 17, 0, ft_clean_exit, scene);
+	mlx_loop(scene->mlx_ptr);
+}
+
+/*
 static void	ft_run_time(t_scene *scene)
 {
 	if (!scene)
@@ -40,7 +82,7 @@ static void	ft_run_time(t_scene *scene)
 	mlx_key_hook(scene->win_ptr, key_handler, scene);
 	mlx_hook(scene->win_ptr, 17, 0, ft_clean_exit, scene);
 	mlx_loop(scene->mlx_ptr);
-}
+}*/
 
 static int	ft_check_args(int argc, char **argv)
 {
@@ -91,6 +133,53 @@ void	ft_print_scene_info(t_scene *scene)
 	}
 }
 
+int	main(int argc, char **argv)
+{
+	t_scene			*scene;
+	t_parse_error	error;
+	int				fd;
+
+	if (ft_check_args(argc, argv))
+	{
+		ft_putstr_fd("Error\nUsage: ./miniRT <scene.rt>\n", 2);
+		return (EXIT_FAILURE);
+	}
+	fd = open(argv[1], O_RDONLY);
+	if (fd < 0)
+	{
+		ft_putstr_fd("Error\nCannot open .rt file\n", 2);
+		return (EXIT_FAILURE);
+	}
+	scene = ft_calloc(1, sizeof(t_scene));
+	if (!scene)
+	{
+		close(fd);
+		ft_putstr_fd("Error\nMemory allocation failed\n", 2);
+		return (EXIT_FAILURE);
+	}
+	scene->img_ptr = ft_calloc(1, sizeof(t_img));
+	if (!scene->img_ptr)
+	{
+		close(fd);
+		ft_destroy_scene(scene);
+		ft_putstr_fd("Error\nMemory allocation failed\n", 2);
+		return (EXIT_FAILURE);
+	}
+	if (ft_parse_rt(fd, scene, &error) < 0)
+	{
+		close(fd);
+		ft_print_parse_error(&error);
+		ft_destroy_scene(scene);
+		return (EXIT_FAILURE);
+	}
+	close(fd);
+	ft_print_scene_info(scene);
+	ft_run_time(scene);
+	return (EXIT_SUCCESS);
+}
+
+/*
+
 int main(int argc, char **argv)
 {
 	t_scene	*scene;
@@ -117,6 +206,7 @@ int main(int argc, char **argv)
 	if (ft_parse_rt(fd, scene) < 0)
 	{
 		close(fd);
+		ft_putstr_fd("Error\nInvalid scene file\n", 2);
 		ft_clean_exit(scene);
 	}
 	close(fd);
@@ -135,6 +225,6 @@ while (curr)
 	ft_print_scene_info(scene);
 
 	ft_run_time(scene);
-	ft_clean_exit(scene);
+	//ft_clean_exit(scene);
 	return (0);
-}
+}*/

@@ -12,6 +12,7 @@ SRC = 	main.c \
 		close.c \
       	draw.c \
       	events.c \
+		error.c \
 		mlx_utils.c \
 		render.c \
 		ray.c \

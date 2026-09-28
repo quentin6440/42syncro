@@ -6,7 +6,7 @@
 /*   By: qcyril-a <qcyril-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/28 00:00:00 by quentin           #+#    #+#             */
-/*   Updated: 2026/09/28 15:27:47 by qcyril-a         ###   ########.fr       */
+/*   Updated: 2026/09/28 17:51:48 by qcyril-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,3 @@ int	key_handler(int key, void *param)
 		ft_clean_exit(param);
 	return (0);
 }
-
-/*int	mouse_handler(int button, int x, int y, void *param)
-{
-	(void)button;
-	(void)x;
-	(void)y;
-	(void)param;
-	return (0);
-}*/

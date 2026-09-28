@@ -17,6 +17,7 @@ SRC = 	main.c \
 		render.c \
 		ray.c \
 		intersect.c \
+		color.c \
 		light.c \
 		normal.c \
 		shadow.c \
@@ -27,12 +28,15 @@ SRC = 	main.c \
 		obj_pl.c \
 		parser.c \
 		parse_elements.c \
+		parse_file.c \
 		parse_obj.c \
 		parse_utils.c \
+		runtime.c \
+		scene_init.c \
+		scene_debug.c \
       	vec_basic.c \
       	vec_math.c \
       	vec_utils.c
-      	#utils.c 
 
 OBJ_DIR = build
 OBJ = $(SRC:%.c=$(OBJ_DIR)/%.o)

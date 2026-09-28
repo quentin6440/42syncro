@@ -1,33 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   obj_cl.c                                           :+:      :+:    :+:   */
+/*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qcyril-a <qcyril-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/28 00:00:00 by quentin           #+#    #+#             */
-/*   Updated: 2026/09/28 17:52:19 by qcyril-a         ###   ########.fr       */
+/*   Updated: 2026/09/28 17:51:39 by qcyril-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minirt.h"
 
-double	ft_hit_cylinder(t_obj *obj, t_ray ray)
+t_vec3	ft_color_add(t_vec3 a, t_vec3 b)
 {
-	double	t_side;
-	double	t_caps;
+	return (vec_new(a.x + b.x, a.y + b.y, a.z + b.z));
+}
 
-	t_side = ft_hit_cylinder_side(obj, ray);
-	t_caps = ft_hit_cylinder_caps(obj, ray, NULL);
-	if (t_side > EPSILON && t_caps > EPSILON)
-	{
-		if (t_side < t_caps)
-			return (t_side);
-		return (t_caps);
-	}
-	if (t_side > EPSILON)
-		return (t_side);
-	if (t_caps > EPSILON)
-		return (t_caps);
-	return (-1.0);
+t_vec3	ft_color_mul(t_vec3 a, t_vec3 b)
+{
+	return (vec_new(a.x * b.x / 255.0,
+			a.y * b.y / 255.0,
+			a.z * b.z / 255.0));
+}
+
+t_vec3	ft_color_scale(t_vec3 color, double ratio)
+{
+	return (vec_new(color.x * ratio,
+			color.y * ratio,
+			color.z * ratio));
+}
+
+double	ft_color_clamp(double value, double min, double max)
+{
+	if (value < min)
+		return (min);
+	if (value > max)
+		return (max);
+	return (value);
 }

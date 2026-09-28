@@ -6,7 +6,7 @@
 /*   By: qcyril-a <qcyril-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/21 13:31:14 by qcyril-a          #+#    #+#             */
-/*   Updated: 2026/09/28 16:50:06 by qcyril-a         ###   ########.fr       */
+/*   Updated: 2026/09/28 17:41:37 by qcyril-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,20 @@ typedef struct s_parse_error
 	const char	*message;
 }	t_parse_error;
 
+typedef struct s_quadratic
+{
+	double	a;
+	double	b;
+	double	c;
+}	t_quadratic;
+
+typedef struct s_global_parser
+{
+	int			*seen;
+	int			(*parser)(char **, t_scene *, t_parse_error *);
+	const char	*duplicate_message;
+}	t_global_parser;
+
 /* --- PARSING --- */
 int		ft_parse_rt(int fd, t_scene *scene, t_parse_error *error);
 int		ft_parse_line(char **tokens, t_scene *scene,
@@ -138,10 +152,26 @@ int		ft_parse_obj(char **tokens, t_scene *scene, t_type type,
 			t_parse_error *error);
 int		ft_parse_fail(t_parse_error *error, const char *message);
 void	ft_print_parse_error(const t_parse_error *error);
+
+/* --- PARSING CONVERSIONS --- */
+int		ft_str_to_float(char *str, double *out);
+int		ft_str_to_vec3(char *str, t_vec3 *vec, int is_dir);
 int		ft_str_to_color(char *str, t_vec3 *color);
 
-/* --- RAYTRACING & RENDERING --- */
+/* mlx / render utils */
+int		ft_put_img_to_window(t_scene *scene);
+void	ft_mlx_pixel_put(t_scene *scene, int x, int y, int color);
+void	ft_run_time(t_scene *scene);
+int		ft_load_scene(char *path, t_scene **scene);
 void	ft_render_scene(t_scene *scene);
+
+/* --- EVENTS & HOOKS --- */
+int		key_handler(int key, void *param);
+//int		mouse_handler(int button, int x, int y, void *param);
+
+
+/* --- RAYTRACING & RENDERING --- */
+
 t_ray	ft_generate_ray(t_camera *cam, double u, double v, t_scene *scene);
 t_hit	ft_intersect_scene(t_scene *scene, t_ray ray);
 t_vec3	ft_get_normal(t_hit hit, t_ray ray);
@@ -154,15 +184,13 @@ double	ft_hit_cylinder(t_obj *cy, t_ray ray);
 double	ft_hit_cylinder_caps(t_obj *obj, t_ray ray, t_vec3 *out_norm);
 double	ft_hit_cylinder_side(t_obj *obj, t_ray ray);
 
-/* mlx / render utils */
-int		ft_put_img_to_window(t_scene *scene);
-void	ft_mlx_pixel_put(t_scene *scene, int x, int y, int color);
-
-/* --- EVENTS & HOOKS --- */
-int		key_handler(int key, void *param);
-//int		mouse_handler(int button, int x, int y, void *param);
+t_vec3	ft_color_add(t_vec3 a, t_vec3 b);
+t_vec3	ft_color_mul(t_vec3 a, t_vec3 b);
+t_vec3	ft_color_scale(t_vec3 color, double ratio);
+double	ft_color_clamp(double value, double min, double max);
 
 /* --- CLEAN & MEMORY UTILS --- */
+
 void	ft_free_tab(char **tab);
 void	ft_free_objects(t_obj **lst);
 void	ft_free_null(void **p);
@@ -171,8 +199,6 @@ int		ft_clean_exit(void *param);
 void	ft_destroy_scene(t_scene *scene);
 void	ft_runtime_error(t_scene *scene, const char *message);
 
-/* --- PARSING CONVERSIONS --- */
-int	ft_str_to_float(char *str, double *out);
-int	ft_str_to_vec3(char *str, t_vec3 *vec, int is_dir);
+void	ft_print_scene_info(t_scene *scene);
 
 #endif

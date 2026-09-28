@@ -6,44 +6,36 @@
 /*   By: qcyril-a <qcyril-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/28 00:00:00 by quentin           #+#    #+#             */
-/*   Updated: 2026/09/28 17:41:58 by qcyril-a         ###   ########.fr       */
+/*   Updated: 2026/09/28 17:37:31 by qcyril-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minirt.h"
 
-static int	ft_is_identifier(char *identifier, char *expected)
-{
-	return (ft_strncmp(identifier, expected,
-			ft_strlen(expected) + 1) == 0);
-}
-
 static int	ft_parse_unique(char **tokens, t_scene *scene,
-		t_parse_error *error, t_global_parser config)
+		t_parse_error *error, int *seen,
+		int (*parser)(char **, t_scene *, t_parse_error *))
 {
-	if (*config.seen)
-		return (ft_parse_fail(error, config.duplicate_message));
-	if (config.parser(tokens, scene, error) < 0)
+	if (*seen)
+		return (ft_parse_fail(error, "duplicate scene element"));
+	if (parser(tokens, scene, error) < 0)
 		return (-1);
-	*config.seen = 1;
+	*seen = 1;
 	return (0);
 }
 
 static int	ft_parse_global(char **tokens, t_scene *scene,
 		t_parse_error *error)
 {
-	if (ft_is_identifier(tokens[0], "A"))
+	if (tokens[0][0] == 'A' && tokens[0][1] == '\0')
 		return (ft_parse_unique(tokens, scene, error,
-				(t_global_parser){&scene->has_ambient,
-				ft_parse_ambient, "duplicate ambient element"}));
-	if (ft_is_identifier(tokens[0], "C"))
+				&scene->has_ambient, ft_parse_ambient));
+	if (tokens[0][0] == 'C' && tokens[0][1] == '\0')
 		return (ft_parse_unique(tokens, scene, error,
-				(t_global_parser){&scene->has_camera,
-				ft_parse_camera, "duplicate camera element"}));
-	if (ft_is_identifier(tokens[0], "L"))
+				&scene->has_camera, ft_parse_camera));
+	if (tokens[0][0] == 'L' && tokens[0][1] == '\0')
 		return (ft_parse_unique(tokens, scene, error,
-				(t_global_parser){&scene->has_light,
-				ft_parse_light, "duplicate light element"}));
+				&scene->has_light, ft_parse_light));
 	return (1);
 }
 
@@ -57,11 +49,11 @@ int	ft_parse_line(char **tokens, t_scene *scene,
 	result = ft_parse_global(tokens, scene, error);
 	if (result != 1)
 		return (result);
-	if (ft_is_identifier(tokens[0], "sp"))
+	if (ft_strncmp(tokens[0], "sp", 3) == 0)
 		return (ft_parse_obj(tokens, scene, SPHERE, error));
-	if (ft_is_identifier(tokens[0], "pl"))
+	if (ft_strncmp(tokens[0], "pl", 3) == 0)
 		return (ft_parse_obj(tokens, scene, PLANE, error));
-	if (ft_is_identifier(tokens[0], "cy"))
+	if (ft_strncmp(tokens[0], "cy", 3) == 0)
 		return (ft_parse_obj(tokens, scene, CYLINDER, error));
 	return (ft_parse_fail(error, "unknown scene element"));
 }

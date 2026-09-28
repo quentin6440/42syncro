@@ -1,3 +1,5 @@
+/* ************************************************************************** */
+/*                                                                            */
 #include "../include/minirt.h"
 
 static double	ft_check_cap_plane(t_ray ray, t_vec3 center,
@@ -21,38 +23,24 @@ static double	ft_check_cap_plane(t_ray ray, t_vec3 center,
 	return (-1.0);
 }
 
-static double	ft_check_cap(t_obj *obj, t_ray ray,
-		t_vec3 axis, int top)
-{
-	t_vec3	center;
-	t_vec3	normal;
-	double	radius;
-
-	radius = obj->diameter / 2.0;
-	if (top)
-	{
-		center = vec_add(obj->pos,
-				vec_scale(axis, obj->height / 2.0));
-		normal = axis;
-	}
-	else
-	{
-		center = vec_sub(obj->pos,
-				vec_scale(axis, obj->height / 2.0));
-		normal = vec_scale(axis, -1.0);
-	}
-	return (ft_check_cap_plane(ray, center, normal, radius));
-}
-
 double	ft_hit_cylinder_caps(t_obj *obj, t_ray ray, t_vec3 *out_norm)
 {
 	t_vec3	axis;
+	t_vec3	bottom_center;
+	t_vec3	top_center;
+	double	radius;
 	double	t_bottom;
 	double	t_top;
 
 	axis = vec_normalize(obj->dir);
-	t_bottom = ft_check_cap(obj, ray, axis, 0);
-	t_top = ft_check_cap(obj, ray, axis, 1);
+	radius = obj->diameter / 2.0;
+	bottom_center = vec_sub(obj->pos,
+			vec_scale(axis, obj->height / 2.0));
+	top_center = vec_add(obj->pos,
+			vec_scale(axis, obj->height / 2.0));
+	t_bottom = ft_check_cap_plane(ray, bottom_center,
+			vec_scale(axis, -1.0), radius);
+	t_top = ft_check_cap_plane(ray, top_center, axis, radius);
 	if (t_bottom > EPSILON
 		&& (t_top <= EPSILON || t_bottom < t_top))
 	{

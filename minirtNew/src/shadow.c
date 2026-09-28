@@ -6,6 +6,7 @@
 /*   By: qcyril-a <qcyril-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/27 22:00:00 by qcyril-a          #+#    #+#             */
+/*   Updated: 2026/09/28 17:53:30 by qcyril-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +48,3 @@ int	ft_is_shadowed(t_scene *scene, t_vec3 point)
 	}
 	return (0);
 }
-

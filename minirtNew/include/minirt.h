@@ -13,7 +13,6 @@
 #ifndef MINIRT_H
 # define MINIRT_H
 
-
 /* 1. INCLUDES */
 # include <math.h>
 # include <stdlib.h>
@@ -27,7 +26,7 @@
 # define ESC_1 53
 # define KEY_C 99
 
-#define EPSILON 1e-6
+# define EPSILON 1e-6
 
 /* 3. STRUCTURES */
 
@@ -182,7 +181,6 @@ void	ft_render_scene(t_scene *scene);
 /* --- EVENTS & HOOKS --- */
 int		key_handler(int key, void *param);
 //int		mouse_handler(int button, int x, int y, void *param);
-
 
 /* --- RAYTRACING & RENDERING --- */
 

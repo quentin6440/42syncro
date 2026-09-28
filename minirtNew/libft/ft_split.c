@@ -5,98 +5,95 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: qcyril-a <qcyril-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/11 16:23:35 by qcyril-a          #+#    #+#             */
-/*   Updated: 2026/09/21 13:30:08 by qcyril-a         ###   ########.fr       */
+/*   Created: 2026/09/28 18:41:38 by qcyril-a          #+#    #+#             */
+/*   Updated: 2026/09/28 18:41:52 by qcyril-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stddef.h>
 
-static void	ft_free_all(char **arr, size_t k)
+static void	ft_free_all(char **array, size_t count)
 {
-	if (!arr)
-		return ;
-	while (k > 0)
+	while (count > 0)
 	{
-		k--;
-		free(arr[k]);
+		count--;
+		free(array[count]);
 	}
-	free(arr);
+	free(array);
 }
 
-static size_t	ft_ctsections(char const *s, char delimiter)
+static size_t	ft_count_words(char const *str, char delimiter)
 {
-	size_t	nsections;
+	size_t	count;
 
-	if (!s)
-		return (0);
-	nsections = 0;
-	while (*s)
+	count = 0;
+	while (*str)
 	{
-		if (*s == delimiter)
+		while (*str == delimiter && *str)
+			str++;
+		if (*str)
 		{
-			while (*s == delimiter && *s)
-				s++;
-		}
-		else
-		{
-			while (*s != delimiter && *s)
-				s++;
-			nsections++;
+			count++;
+			while (*str != delimiter && *str)
+				str++;
 		}
 	}
-	return (nsections);
+	return (count);
 }
 
-static int	ft_extractsection(char **section, char const *s, char c)
+static char	*ft_get_word(char const *str, size_t *index,
+		char delimiter)
 {
-	size_t	i;
-	size_t	j;
-	size_t	k;
+	size_t	start;
+	size_t	length;
 
-	i = 0;
-	j = 0;
-	k = 0;
-	while (s[i])
+	start = *index;
+	length = 0;
+	while (str[*index] && str[*index] != delimiter)
 	{
-		if (s[i] == c)
-			i++;
-		else
+		(*index)++;
+		length++;
+	}
+	return (ft_substr(str, start, length));
+}
+
+static int	ft_fill_array(char **array, char const *str, char delimiter)
+{
+	size_t	index;
+	size_t	word_index;
+
+	index = 0;
+	word_index = 0;
+	while (str[index])
+	{
+		while (str[index] == delimiter && str[index])
+			index++;
+		if (str[index])
 		{
-			j = i;
-			while (s[j] && s[j] != c)
-				j++;
-			section[k] = ft_substr(s, i, j - i);
-			if (!section[k])
+			array[word_index] = ft_get_word(str, &index, delimiter);
+			if (!array[word_index])
 			{
-				ft_free_all(section, k);
+				ft_free_all(array, word_index);
 				return (1);
 			}
-			k++;
-			i = j;
+			word_index++;
 		}
 	}
 	return (0);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(char const *str, char delimiter)
 {
-	char	**myarr;
+	char	**array;
+	size_t	word_count;
 
-	myarr = NULL;
-	if (s == NULL)
-	{
-		myarr = ft_calloc(1, sizeof(char *));
-		if (!myarr)
-			return (NULL);
-		myarr[0] = NULL;
-		return (myarr);
-	}
-	myarr = ft_calloc((ft_ctsections(s, c) + 1), sizeof(char *));
-	if (!myarr)
+	if (!str)
+		return (ft_calloc(1, sizeof(char *)));
+	word_count = ft_count_words(str, delimiter);
+	array = ft_calloc(word_count + 1, sizeof(char *));
+	if (!array)
 		return (NULL);
-	if (ft_extractsection(myarr, s, c))
+	if (ft_fill_array(array, str, delimiter))
 		return (NULL);
-	return (myarr);
+	return (array);
 }

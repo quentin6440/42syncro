@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qcyril-a <qcyril-a@student.42lisboa.c      +#+  +:+       +#+        */
+/*   By: qcyril-a <qcyril-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 17:59:02 by qcyril-a          #+#    #+#             */
-/*   Updated: 2025/10/12 11:15:16 by qcyril-a         ###   ########.fr       */
+/*   Updated: 2026/09/28 18:30:50 by qcyril-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@
 #  define BUFFER_SIZE 42
 # endif
 
-int	    ft_atoi_strict(char *str, int *out);
-int	    ft_atof(char *str, double *out);
+int		ft_atoi_strict(char *str, int *out);
+int		ft_atof(char *str, double *out);
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t nmemb, size_t size);
-int	    ft_isspace(char c);
+int		ft_isspace(char c);
 size_t	ft_strlen(const char *s);
 void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);

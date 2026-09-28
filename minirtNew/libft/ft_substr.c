@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: qcyril-a <qcyril-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/09/21 13:31:00 by qcyril-a          #+#    #+#             */
-/*   Updated: 2026/09/21 13:31:01 by qcyril-a         ###   ########.fr       */
+/*   Created: 2026/09/28 18:39:08 by qcyril-a          #+#    #+#             */
+/*   Updated: 2026/09/28 18:39:58 by qcyril-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,26 @@
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char *p = NULL;
-	size_t	len_s = ft_strlen(s);
-	size_t i = 0;
+	char	*result;
+	size_t	string_len;
+	size_t	index;
 
-	if ( !len || start > len_s)
-		return ft_strdup("");
-	if (len > len_s - start)
-		len = len_s - start;
-	p = malloc(len + 1);
-	if (!p)
-		return NULL;
-	while (i < len)
+	if (!s)
+		return (NULL);
+	string_len = ft_strlen(s);
+	if (start >= string_len || len == 0)
+		return (ft_strdup(""));
+	if (len > string_len - start)
+		len = string_len - start;
+	result = malloc(len + 1);
+	if (!result)
+		return (NULL);
+	index = 0;
+	while (index < len)
 	{
-		p[i] = s[start + i];
-		i++;
+		result[index] = s[start + index];
+		index++;
 	}
-	p[i] = 0;
-	
-	return p;
+	result[index] = '\0';
+	return (result);
 }

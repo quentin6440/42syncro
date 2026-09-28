@@ -6,7 +6,7 @@
 /*   By: qcyril-a <qcyril-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/28 18:12:07 by qcyril-a          #+#    #+#             */
-/*   Updated: 2026/09/28 18:12:09 by qcyril-a         ###   ########.fr       */
+/*   Updated: 2026/09/28 18:56:14 by qcyril-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,10 @@ static t_vec3	ft_diffuse_light(t_scene *scene, t_hit hit)
 	t_vec3	normal;
 	t_vec3	light_dir;
 	t_vec3	diffuse;
-	t_ray	light_ray;
 	double	intensity;
 
+	normal = ft_get_normal(hit);
 	light_dir = vec_normalize(vec_sub(scene->light.pos, hit.point));
-	light_ray.origin = scene->light.pos;
-	light_ray.dir = vec_scale(light_dir, -1.0);
-	normal = ft_get_normal(hit, light_ray);
 	intensity = vec_dot(normal, light_dir);
 	if (intensity < 0.0)
 		intensity = 0.0;

@@ -6,7 +6,7 @@
 /*   By: qcyril-a <qcyril-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/21 13:31:14 by qcyril-a          #+#    #+#             */
-/*   Updated: 2026/09/28 18:51:03 by qcyril-a         ###   ########.fr       */
+/*   Updated: 2026/09/28 18:56:47 by qcyril-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,7 +186,7 @@ int		ft_expose_handler(void *param);
 
 t_ray	ft_generate_ray(t_camera *cam, double u, double v, t_scene *scene);
 t_hit	ft_intersect_scene(t_scene *scene, t_ray ray);
-t_vec3	ft_get_normal(t_hit hit, t_ray ray);
+t_vec3	ft_get_normal(t_hit hit);
 int		ft_is_shadowed(t_scene *scene, t_vec3 point);
 int		ft_compute_light(t_scene *scene, t_hit hit);
 

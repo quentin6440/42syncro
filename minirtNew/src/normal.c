@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: qcyril-a <qcyril-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/09/28 00:00:00 by quentin           #+#    #+#             */
-/*   Updated: 2026/09/28 17:52:11 by qcyril-a         ###   ########.fr       */
+/*   Created: 2026/09/28 18:58:31 by qcyril-a          #+#    #+#             */
+/*   Updated: 2026/09/28 18:58:32 by qcyril-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,21 +45,15 @@ static t_vec3	ft_cylinder_normal(t_hit hit)
 	return (vec_normalize(normal));
 }
 
-t_vec3	ft_get_normal(t_hit hit, t_ray ray)
+t_vec3	ft_get_normal(t_hit hit)
 {
-	t_vec3	normal;
-
 	if (!hit.valid || !hit.obj)
 		return (vec_new(0.0, 0.0, 0.0));
 	if (hit.obj->type == SPHERE)
-		normal = ft_sphere_normal(hit);
-	else if (hit.obj->type == PLANE)
-		normal = ft_plane_normal(hit);
-	else if (hit.obj->type == CYLINDER)
-		normal = ft_cylinder_normal(hit);
-	else
-		return (vec_new(0.0, 0.0, 0.0));
-	if (vec_dot(normal, ray.dir) > 0.0)
-		normal = vec_scale(normal, -1.0);
-	return (normal);
+		return (ft_sphere_normal(hit));
+	if (hit.obj->type == PLANE)
+		return (ft_plane_normal(hit));
+	if (hit.obj->type == CYLINDER)
+		return (ft_cylinder_normal(hit));
+	return (vec_new(0.0, 0.0, 0.0));
 }

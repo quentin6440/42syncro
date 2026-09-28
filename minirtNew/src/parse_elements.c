@@ -6,7 +6,7 @@
 /*   By: qcyril-a <qcyril-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/28 00:00:00 by quentin           #+#    #+#             */
-/*   Updated: 2026/09/28 15:06:08 by qcyril-a         ###   ########.fr       */
+/*   Updated: 2026/09/28 15:42:20 by qcyril-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,48 +64,3 @@ int	ft_parse_light(char **tokens, t_scene *scene,
 		return (ft_parse_fail(error, "invalid light color"));
 	return (0);
 }
-
-/*
-int	ft_parse_ambient(char **tokens, t_scene *scene)
-{
-	if (!tokens[1] || !tokens[2] || tokens[3])
-		return (ft_putstr_fd("Error\nBad ambient format\n", 2), -1);
-	if (ft_str_to_float(tokens[1], &scene->ambient.ratio) != 0)
-		return (ft_putstr_fd("Error\nBad ambient ratio\n", 2), -1);
-	if (scene->ambient.ratio < 0.0 || scene->ambient.ratio > 1.0)
-		return (ft_putstr_fd("Error\nAmbient ratio out of bounds\n", 2), -1);
-	if (ft_str_to_color(tokens[2], &scene->ambient.color) != 0)
-		return (ft_putstr_fd("Error\nBad ambient color\n", 2), -1);
-	return (0);
-}
-
-int	ft_parse_camera(char **tokens, t_scene *scene)
-{
-	if (!tokens[1] || !tokens[2] || !tokens[3] || tokens[4])
-		return (ft_putstr_fd("Error\nBad camera format\n", 2), -1);
-	if (ft_str_to_vec3(tokens[1], &scene->camera.pos, 0) != 0)
-		return (ft_putstr_fd("Error\nBad camera position\n", 2), -1);
-	if (ft_str_to_vec3(tokens[2], &scene->camera.dir, 1) != 0)
-		return (ft_putstr_fd("Error\nBad camera direction\n", 2), -1);
-	scene->camera.dir = vec_normalize(scene->camera.dir);
-	if (ft_str_to_float(tokens[3], &scene->camera.fov) != 0)
-		return (ft_putstr_fd("Error\nBad camera FOV\n", 2), -1);
-	if (scene->camera.fov < 0.0 || scene->camera.fov > 180.0)
-		return (ft_putstr_fd("Error\nCamera FOV out of bounds\n", 2), -1);
-	return (0);
-}
-
-int	ft_parse_light(char **tokens, t_scene *scene)
-{
-	if (!tokens[1] || !tokens[2] || !tokens[3] || tokens[4])
-		return (ft_putstr_fd("Error\nBad light format\n", 2), -1);
-	if (ft_str_to_vec3(tokens[1], &scene->light.pos, 0) != 0)
-		return (ft_putstr_fd("Error\nBad light position\n", 2), -1);
-	if (ft_str_to_float(tokens[2], &scene->light.ratio) != 0)
-		return (ft_putstr_fd("Error\nBad light ratio\n", 2), -1);
-	if (scene->light.ratio < 0.0 || scene->light.ratio > 1.0)
-		return (ft_putstr_fd("Error\nLight ratio out of bounds\n", 2), -1);
-	if (ft_str_to_color(tokens[3], &scene->light.color) != 0)
-		return (ft_putstr_fd("Error\nBad light color\n", 2), -1);
-	return (0);
-}*/

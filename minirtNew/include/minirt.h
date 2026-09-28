@@ -6,7 +6,7 @@
 /*   By: qcyril-a <qcyril-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/21 13:31:14 by qcyril-a          #+#    #+#             */
-/*   Updated: 2026/09/28 15:08:26 by qcyril-a         ###   ########.fr       */
+/*   Updated: 2026/09/28 15:26:36 by qcyril-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,6 @@ int		ft_parse_obj(char **tokens, t_scene *scene, t_type type,
 
 int		ft_parse_fail(t_parse_error *error, const char *message);
 void	ft_print_parse_error(const t_parse_error *error);
-void	ft_destroy_scene(t_scene *scene);
 
 int		ft_str_to_color(char *str, t_vec3 *color);
 
@@ -198,10 +197,10 @@ int		key_handler(int key, void *param);
 void	ft_free_tab(char **tab);
 void	ft_free_objects(t_obj **lst);
 void	ft_free_null(void **p);
-int		ft_clean_exit(t_scene *scene);
-//void	ft_error(char *msg, t_scene *scene);
-void	ft_runtime_error(t_scene *scene, const char *message);
 
+int		ft_clean_exit(void *param);
+void	ft_destroy_scene(t_scene *scene);
+void	ft_runtime_error(t_scene *scene, const char *message);
 
 /* --- PARSING CONVERSIONS --- */
 int	ft_str_to_float(char *str, double *out);

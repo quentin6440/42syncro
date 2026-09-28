@@ -6,7 +6,7 @@
 /*   By: qcyril-a <qcyril-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/28 00:00:00 by quentin           #+#    #+#             */
-/*   Updated: 2026/09/28 15:09:10 by qcyril-a         ###   ########.fr       */
+/*   Updated: 2026/09/28 15:40:53 by qcyril-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,77 +56,19 @@ void	ft_runtime_error(t_scene *scene, const char *message)
 	ft_putstr_fd("Error\n", 2);
 	if (message)
 	{
-		ft_putendl_fd((char *)message, 2);
+		ft_putstr_fd((char *)message, 2);
+		ft_putchar_fd('\n', 2);
 	}
 	ft_destroy_scene(scene);
 	exit(EXIT_FAILURE);
 }
 
-//int	ft_clean_exit(void *param)
-int	ft_clean_exit(t_scene *scene)
+int	ft_clean_exit(void *param)
 {
-//	t_scene	*scene;
+	t_scene	*scene;
 
-//	scene = (t_scene *)param;
+	scene = (t_scene *)param;
 	ft_destroy_scene(scene);
 	exit(EXIT_SUCCESS);
 	return (0);
 }
-/*
-int	ft_clean_exit(t_scene *scene)
-{
-	if (!scene)
-		exit(EXIT_FAILURE);
-
-	if (scene->mlx_ptr)
-	{
-		if (scene->img_ptr && scene->img_ptr->p)
-		{
-			mlx_destroy_image(scene->mlx_ptr, scene->img_ptr->p);
-			scene->img_ptr->p = NULL;
-		}
-		if (scene->win_ptr)
-		{
-			mlx_destroy_window(scene->mlx_ptr, scene->win_ptr);
-			scene->win_ptr = NULL;
-		}
-		mlx_destroy_display(scene->mlx_ptr);
-		free(scene->mlx_ptr);
-		scene->mlx_ptr = NULL;
-	}
-
-	if (scene->img_ptr)
-	{
-		free(scene->img_ptr);
-		scene->img_ptr = NULL;
-	}
-	ft_free_objects(&scene->objects);
-	free(scene);
-	exit(EXIT_SUCCESS);
-}*/
-
-/*
-int	ft_clean_exit(t_scene *scene)
-{
-	if (!scene)
-		exit(EXIT_FAILURE);
-	if (scene->mlx_ptr)
-	{
-		if (scene->img_ptr && scene->img_ptr->p)
-		{
-			mlx_destroy_image(scene->mlx_ptr, scene->img_ptr->p);
-			scene->img_ptr->p = NULL;
-		}
-		if (scene->win_ptr)
-			mlx_destroy_window(scene->mlx_ptr, scene->win_ptr);
-		scene->win_ptr = NULL;
-		mlx_destroy_display(scene->mlx_ptr);
-		free(scene->mlx_ptr);
-		scene->mlx_ptr = NULL;
-	}
-	if (scene->img_ptr)
-		ft_free_null((void **)&scene->img_ptr);
-	ft_free_objects(&scene->objects);
-	free(scene);
-	exit(EXIT_SUCCESS);
-}*/

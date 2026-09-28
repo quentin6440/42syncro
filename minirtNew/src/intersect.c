@@ -1,13 +1,3 @@
-/*
-
-t_hit ft_intersect_scene(t_scene *scene, t_ray ray);
-
-t_vec3 ft_get_normal(t_hit hit);
-
-int ft_is_shadowed(t_scene *scene, t_vec3 point);
-
-int ft_compute_light(t_scene *scene, t_hit hit);*/
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -16,7 +6,7 @@ int ft_compute_light(t_scene *scene, t_hit hit);*/
 /*   By: qcyril-a <qcyril-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/27 22:00:00 by qcyril-a          #+#    #+#             */
-/*   Updated: 2026/09/27 22:00:00 by qcyril-a         ###   ########.fr       */
+/*   Updated: 2026/09/28 15:41:23 by qcyril-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

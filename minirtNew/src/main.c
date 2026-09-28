@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: qcyril-a <qcyril-a@student.42lisboa.com    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/09/21 13:32:26 by qcyril-a          #+#    #+#             */
-/*   Updated: 2026/09/28 15:15:51 by qcyril-a         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 
 #include "../include/minirt.h"
@@ -55,34 +44,6 @@ static void	ft_run_time(t_scene *scene)
 	mlx_hook(scene->win_ptr, 17, 0, ft_clean_exit, scene);
 	mlx_loop(scene->mlx_ptr);
 }
-
-/*
-static void	ft_run_time(t_scene *scene)
-{
-	if (!scene)
-		exit(0);
-	scene->mlx_ptr = mlx_init();
-	if (!scene->mlx_ptr)
-		ft_error("Failed to initialize MiniLibX", scene);
-	scene->win_width = 800;
-	scene->win_height = 600;
-	scene->win_ptr = mlx_new_window(scene->mlx_ptr, scene->win_width,
-		scene->win_height, "miniRT - Raytracer");
-	if (!scene->win_ptr)
-		ft_error("Failed to create MiniLibX window", scene);
-	if (ft_put_img_to_window(scene))
-		ft_error("Failed to create MiniLibX image", scene);
-
-	ft_render_scene(scene);
-
-	mlx_put_image_to_window
-	(scene->mlx_ptr, scene->win_ptr,
-		scene->img_ptr->p, 0, 0);
-
-	mlx_key_hook(scene->win_ptr, key_handler, scene);
-	mlx_hook(scene->win_ptr, 17, 0, ft_clean_exit, scene);
-	mlx_loop(scene->mlx_ptr);
-}*/
 
 static int	ft_check_args(int argc, char **argv)
 {
@@ -133,6 +94,38 @@ void	ft_print_scene_info(t_scene *scene)
 	}
 }
 
+static int	ft_open_scene(char *path)
+{
+	int	fd;
+
+	fd = open(path, O_RDONLY);
+	if (fd < 0)
+	{
+		ft_putstr_fd("Error\nCannot open .rt file\n", 2);
+		return (-1);
+	}
+	return (fd);
+}
+
+static int	ft_init_scene(t_scene **scene)
+{
+	*scene = ft_calloc(1, sizeof(t_scene));
+	if (!*scene)
+	{
+		ft_putstr_fd("Error\nMemory allocation failed\n", 2);
+		return (-1);
+	}
+	(*scene)->img_ptr = ft_calloc(1, sizeof(t_img));
+	if (!(*scene)->img_ptr)
+	{
+		ft_destroy_scene(*scene);
+		*scene = NULL;
+		ft_putstr_fd("Error\nMemory allocation failed\n", 2);
+		return (-1);
+	}
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
 	t_scene			*scene;
@@ -144,27 +137,11 @@ int	main(int argc, char **argv)
 		ft_putstr_fd("Error\nUsage: ./miniRT <scene.rt>\n", 2);
 		return (EXIT_FAILURE);
 	}
-	fd = open(argv[1], O_RDONLY);
+	fd = ft_open_scene(argv[1]);
 	if (fd < 0)
-	{
-		ft_putstr_fd("Error\nCannot open .rt file\n", 2);
 		return (EXIT_FAILURE);
-	}
-	scene = ft_calloc(1, sizeof(t_scene));
-	if (!scene)
-	{
-		close(fd);
-		ft_putstr_fd("Error\nMemory allocation failed\n", 2);
-		return (EXIT_FAILURE);
-	}
-	scene->img_ptr = ft_calloc(1, sizeof(t_img));
-	if (!scene->img_ptr)
-	{
-		close(fd);
-		ft_destroy_scene(scene);
-		ft_putstr_fd("Error\nMemory allocation failed\n", 2);
-		return (EXIT_FAILURE);
-	}
+	if (ft_init_scene(&scene) < 0)
+		return (close(fd), EXIT_FAILURE);
 	if (ft_parse_rt(fd, scene, &error) < 0)
 	{
 		close(fd);
@@ -175,56 +152,6 @@ int	main(int argc, char **argv)
 	close(fd);
 	ft_print_scene_info(scene);
 	ft_run_time(scene);
+	ft_destroy_scene(scene);
 	return (EXIT_SUCCESS);
 }
-
-/*
-
-int main(int argc, char **argv)
-{
-	t_scene	*scene;
-	int		fd;
-
-	if (ft_check_args(argc, argv))
-	{
-		ft_putstr_fd("Error\nUsage: ./miniRT <scene.rt>\n", 2);
-		return (1);
-	}
-	fd = open(argv[1], O_RDONLY);
-	if (fd < 0)
-	{
-		ft_putstr_fd("Error\nCannot open .rt file\n", 2);
-		return (1);
-	}
-	scene = ft_calloc(1, sizeof(t_scene));
-	if (!scene)
-		return (close(fd), 1);
-	scene->img_ptr = ft_calloc(1, sizeof(t_img));
-	if (!scene->img_ptr)
-		return (close(fd), free(scene), 1);
-
-	if (ft_parse_rt(fd, scene) < 0)
-	{
-		close(fd);
-		ft_putstr_fd("Error\nInvalid scene file\n", 2);
-		ft_clean_exit(scene);
-	}
-	close(fd);
-
-// Test temporaire de contrôle
-
-t_obj *curr = scene->objects;
-int i = 0;
-while (curr)
-{
-    printf("Objet %d: type=%d, pos=[%.1f, %.1f, %.1f]\n", 
-           i++, curr->type, curr->pos.x, curr->pos.y, curr->pos.z);
-    curr = curr->next;
-}
-//fin
-	ft_print_scene_info(scene);
-
-	ft_run_time(scene);
-	//ft_clean_exit(scene);
-	return (0);
-}*/

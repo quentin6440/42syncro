@@ -1,0 +1,15 @@
+# Ambient light
+A 0.15 255,255,255
+
+# Camera looking along the z axis
+C 0.0,0.0,-10.0 0.0,0.0,1.0 70
+
+# Main light
+L -5.0,6.0,-4.0 0.85 255,255,255
+
+# First sphere at the origin
+sp 0.0,0.0,0.0 3.0 220,40,40
+
+# Second sphere translated along the camera direction
+# The translation is greater than the sphere diameter
+sp 0.0,0.0,6.0 3.0 40,100,220

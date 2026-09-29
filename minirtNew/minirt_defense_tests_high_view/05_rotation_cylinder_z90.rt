@@ -1,0 +1,11 @@
+# Ambient light
+A 0.15 255,255,255
+
+# High camera with a downward view
+C 0.0,7.0,-12.0 0.0,-0.30,1.0 70
+
+# Main light
+L -5.0,9.0,-4.0 0.85 255,255,255
+
+# Cylinder whose axis is along X after a 90 degree Z rotation
+cy 0.0,0.0,5.0 1.0,0.0,0.0 2.0 6.0 40,100,220

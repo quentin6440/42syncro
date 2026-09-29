@@ -23,8 +23,6 @@
 
 /* 2. DEFINES & KEYCODES */
 # define ESC 65307
-# define ESC_1 53
-# define KEY_C 99
 
 # define EPSILON 1e-6
 
@@ -181,6 +179,7 @@ void	ft_render_scene(t_scene *scene);
 /* --- EVENTS & HOOKS --- */
 int		key_handler(int key, void *param);
 int		ft_expose_handler(void *param);
+int		resize_handler(int width, int height, void *param);
 
 /* --- RAYTRACING & RENDERING --- */
 

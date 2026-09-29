@@ -1,0 +1,24 @@
+# Ambient light
+A 0.15 255,255,255
+
+# High camera at a random position, not on an axis or diagonal
+# Direction points toward the center of the scene
+C 7.0,8.0,-10.0 -0.47,-0.45,0.76 70
+
+# Side light positioned high enough to produce visible shadows
+L -6.0,10.0,-2.0 0.9 255,255,255
+
+# Ground plane
+pl 0.0,-2.0,0.0 0.0,1.0,0.0 80,110,70
+
+# Main sphere receiving sideways light and casting a shadow
+sp 0.0,0.0,5.0 3.5 220,45,45
+
+# Translated sphere for the lighting-after-translation test
+sp 4.0,0.0,8.0 2.0 45,100,220
+
+# Cylinder casting another shadow
+cy -3.5,0.0,7.0 0.0,1.0,0.0 2.2 4.5 45,190,90
+
+# Horizontal cylinder
+cy 2.0,-0.5,11.0 1.0,0.0,0.0 2.0 5.0 190,70,190

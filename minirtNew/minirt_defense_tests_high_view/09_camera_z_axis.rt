@@ -1,0 +1,13 @@
+# Ambient light
+A 0.15 255,255,255
+
+# Camera on the z axis, elevated and looking toward the origin
+C 0.0,5.0,-12.0 0.0,-0.38,1.0 70
+
+# Main light
+L -5.0,9.0,-4.0 0.85 255,255,255
+
+# Scene around the origin
+sp 0.0,0.0,3.0 3.0 220,50,50
+pl 0.0,-2.0,0.0 0.0,1.0,0.0 70,120,70
+cy -3.0,0.0,6.0 0.0,1.0,0.0 2.0 4.0 50,100,220

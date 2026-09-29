@@ -45,9 +45,8 @@ all: $(NAME)
 
 $(NAME): $(LIBFT) $(MLX) $(OBJ)
 	@$(CC) $(CFLAGS) $(OBJ) $(LIBS) -o $(NAME)
-	@echo "Compile OK, ready to launch with: ./$(NAME) <scene.rt>"
+	@echo "Compile OK, ready to run with: ./$(NAME) <scene.rt>"
 
-# Règle spéciale pour débugger avec AddressSanitizer
 sanitize: CFLAGS += -g3 -fsanitize=address
 sanitize: re
 	@echo "Compilation avec -fsanitize=address activée !"
@@ -58,10 +57,10 @@ $(LIBFT):
 $(MLX):
 	@make -C ./minilibx-linux/ > /dev/null 2>&1
 
-
-$(OBJ_DIR)/%.o: src/%.c
-#$(OBJ_DIR)/%.o: src/%.c | $(OBJ_DIR)
+$(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
+
+$(OBJ_DIR)/%.o: src/%.c | $(OBJ_DIR)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:

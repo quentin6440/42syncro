@@ -1,0 +1,11 @@
+# Ambient light
+A 0.15 255,255,255
+
+# High camera looking down at the horizontal plane
+C 0.0,7.0,-9.0 0.0,-0.55,1.0 70
+
+# Main light
+L -5.0,8.0,-4.0 0.85 255,255,255
+
+# Horizontal plane with z = 0
+pl 0.0,0.0,0.0 0.0,1.0,0.0 70,120,190

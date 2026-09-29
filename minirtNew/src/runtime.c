@@ -34,5 +34,6 @@ void	ft_run_time(t_scene *scene)
 	mlx_key_hook(scene->win_ptr, key_handler, scene);
 	mlx_expose_hook(scene->win_ptr, ft_expose_handler, scene);
 	mlx_hook(scene->win_ptr, 17, 0, ft_clean_exit, scene);
+	mlx_hook(scene->win_ptr, 22, 1L << 17, resize_handler, scene);
 	mlx_loop(scene->mlx_ptr);
 }

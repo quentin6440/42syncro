@@ -1,0 +1,24 @@
+# Ambient light
+A 0.15 255,255,255
+
+# Random camera position, not on an axis or diagonal
+# Direction points toward the origin
+C 6.0,4.0,-8.0 -0.557086,-0.371391,0.742781 70
+
+# Light placed to the side and above the scene
+L -5.0,7.0,-2.0 0.9 255,255,255
+
+# Ground plane for visible shadows
+pl 0.0,-2.0,0.0 0.0,1.0,0.0 80,110,70
+
+# Sphere receiving sideways light and casting a shadow
+sp 0.0,0.0,5.0 4.0 220,45,45
+
+# Translated sphere for checking lighting after translation
+sp 3.0,0.0,8.0 2.0 45,100,220
+
+# Cylinder for a more complex shadow scene
+cy -3.0,0.0,7.0 0.0,1.0,0.0 2.5 4.5 45,190,90
+
+# Horizontal cylinder
+cy 2.0,-0.5,11.0 1.0,0.0,0.0 2.0 5.0 190,70,190

@@ -18,7 +18,7 @@ static void	ft_print_objects(t_scene *scene)
 	t_obj	*obj;
 	int		i;
 
-	printf("--- Objets dans la liste ---\n");
+	printf("--- Objects in the list ---\n");
 	obj = scene->objects;
 	i = 1;
 	while (obj)
@@ -41,7 +41,7 @@ static void	ft_print_objects(t_scene *scene)
 
 void	ft_print_scene_info(t_scene *scene)
 {
-	printf("=== CONTENU DE LA SCENE ===\n");
+	printf("=== SCENE CONTENT ===\n");
 	printf("Ambient: ratio=%.2f, color=[%.0f,%.0f,%.0f]\n",
 		scene->ambient.ratio, scene->ambient.color.x,
 		scene->ambient.color.y, scene->ambient.color.z);

@@ -14,7 +14,7 @@
 
 int	key_handler(int key, void *param)
 {
-	if (key == ESC || key == ESC_1)
+	if (key == ESC)
 		ft_clean_exit(param);
 	return (0);
 }
@@ -29,5 +29,17 @@ int	ft_expose_handler(void *param)
 		return (0);
 	mlx_put_image_to_window(scene->mlx_ptr, scene->win_ptr,
 		scene->img_ptr->p, 0, 0);
+	return (0);
+}
+
+int	resize_handler(int width, int height, void *param)
+{
+	t_scene	*scene;
+
+	scene = (t_scene *)param;
+	if (width <= 0 || height <= 0)
+		return (0);
+	scene->win_width = width;
+	scene->win_height = height;
 	return (0);
 }

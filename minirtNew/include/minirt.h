@@ -6,7 +6,7 @@
 /*   By: qcyril-a <qcyril-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/21 13:31:14 by qcyril-a          #+#    #+#             */
-/*   Updated: 2026/09/28 18:56:47 by qcyril-a         ###   ########.fr       */
+/*   Updated: 2026/09/30 09:52:25 by qcyril-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,7 +179,7 @@ void	ft_render_scene(t_scene *scene);
 /* --- EVENTS & HOOKS --- */
 int		key_handler(int key, void *param);
 int		ft_expose_handler(void *param);
-int		resize_handler(int width, int height, void *param);
+//int		resize_handler(int width, int height, void *param);
 
 /* --- RAYTRACING & RENDERING --- */
 

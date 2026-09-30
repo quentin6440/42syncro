@@ -11,3 +11,5 @@ void Logger::log(const std::string& message) {
     // Log the message
     std::cout << "Log: " << message << std::endl;
 }
+
+Logger::~Logger() {}

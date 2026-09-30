@@ -6,7 +6,7 @@
 /*   By: qcyril-a <qcyril-a@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/28 00:00:00 by quentin           #+#    #+#             */
-/*   Updated: 2026/09/28 18:58:52 by qcyril-a         ###   ########.fr       */
+/*   Updated: 2026/09/30 09:52:04 by qcyril-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	ft_expose_handler(void *param)
 		scene->img_ptr->p, 0, 0);
 	return (0);
 }
-
+/*
 int	resize_handler(int width, int height, void *param)
 {
 	t_scene	*scene;
@@ -42,4 +42,4 @@ int	resize_handler(int width, int height, void *param)
 	scene->win_width = width;
 	scene->win_height = height;
 	return (0);
-}
+}*/

@@ -61,5 +61,5 @@ The project introduces basic networking concepts related to the OSI and TCP/IP m
 * Cloudflare Learning Center — Networking
 * 42 NetPractice subject
 
-AI was used as a learning aid to explain networking concepts, subnetting, IP calculations, routing and network diagrams, and to help understand errors encountered during the exercises.
+AI was used as a learning aid to explain networking concepts, subnetting, IP calculations, routing and network diagrams and to help understand errors encountered during the exercises.
  
